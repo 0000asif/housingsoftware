@@ -9,6 +9,8 @@ use App\Models\House;
 use App\Models\Renter;
 use Illuminate\Http\Request;
 use App\Models\RentAdjustment;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class RentController extends Controller
@@ -46,7 +48,6 @@ class RentController extends Controller
      */
     public function store(Request $request)
     {
-
         // Validate the form data
         $validated = $request->validate([
             'renter_id' => 'required|exists:renters,id',
@@ -68,17 +69,22 @@ class RentController extends Controller
             'member' => 'nullable|numeric|min:0',
         ]);
 
-        $start_date = date('Y-m-d', strtotime($request->rent_date));
-        // dd($request->all());
-        $validated['user_id'] = Auth::user()->id;
-        $validated['status'] = '1';
+        $start_date             = date('Y-m-d', strtotime($request->rent_date));
+        $validated['user_id']   = Auth::user()->id;
+        $validated['status']    = '1';
         $validated['rent_date'] = $start_date;
+        $rent_info = Rent::create($validated);
 
-        Rent::create($validated);
+        $inputs                     = $validated;
+        $inputs['rent_id']          = $rent_info->id;
+        $inputs['user_id']          = Auth::user()->id;
+        $inputs['adjustment_date']  = Carbon::now()->format('Y-m-d');
+        $inputs['month']            = Carbon::parse($start_date)->format('m');
+        $inputs['year']             = Carbon::parse($start_date)->format('Y');
+        RentAdjustment::create($inputs);
 
-        $unit = Unit::find($request->unit_id);
-
-        $unit->rent_status = '1'; // status 0 meand avilable & 1 means rented.
+        $unit               = Unit::find($request->unit_id);
+        $unit->rent_status  = '1'; // status 0 meand avilable & 1 means rented.
         $unit->save();
 
         // Redirect or return response
@@ -110,7 +116,12 @@ class RentController extends Controller
         $houses = House::where('status', '1')->get();
 
         $floors = Floor::where('house_id', $rent->house_id)->get();
-        $units = Unit::where('floor_id', $rent->floor_id)->get();
+        $units = Unit::where('floor_id', $rent->floor_id)
+            ->where(function ($query) use ($rent) {
+                $query->where('rent_status', 0)
+                    ->orWhere('id', $rent->unit_id);
+            })
+            ->get();
 
         return view('rent.edit', compact('rent', 'renters', 'houses', 'floors', 'units'));
     }
@@ -148,19 +159,47 @@ class RentController extends Controller
         ]);
 
         $start_date = date('Y-m-d', strtotime($request->rent_date));
+        $rent       = Rent::findOrFail($id);
+        $unit_id    = $rent->unit_id;
 
-        $rent = Rent::findOrFail($id);
+        if ($unit_id == $request->unit_id) {
+            $unit_status = false;
+        } else {
+            $unit_status = true;
+        }
 
-        $data = $request->all();
-        $data['user_id'] = Auth::user()->id;
-        $data['rent_date'] = $start_date;
-        $data['status'] = $request->status;
-
+        $data               = $request->all();
+        $data['user_id']    = Auth::user()->id;
+        $data['rent_date']  = $start_date;
+        $data['status']     = $request->status;
         $rent->update($data);
 
-        $unit = Unit::find($request->unit_id);
-        $unit->rent_status = $request->status; // status 0 meand avilable & 1 means rented.
-        $unit->save();
+        $check_adjustemnt_info = RentAdjustment::where('rent_id', $rent->id)->count();
+        if ($check_adjustemnt_info == 1) {
+            $rent_adjustment                          = RentAdjustment::where('rent_id', $rent->id)->first();
+            $rent_adjustment_data                     = $request->all();
+            $rent_adjustment_data['user_id']          = Auth::user()->id;
+            $rent_adjustment_data['adjustment_date']  = Carbon::now()->format('Y-m-d');
+            $rent_adjustment_data['month']            = Carbon::parse($start_date)->format('m');
+            $rent_adjustment_data['year']             = Carbon::parse($start_date)->format('Y');
+            $rent_adjustment->update($rent_adjustment_data);
+        }
+
+        if ($unit_status == true && $request->status == 1) {
+
+            $befor_unit_info                = Unit::find($unit_id);
+            $befor_unit_info->rent_status   = 0;
+            $befor_unit_info->save();
+
+            $unit               = Unit::find($request->unit_id);
+            $unit->rent_status  = 1; // status 0 meand avilable & 1 means rented.
+            $unit->save();
+        } else {
+            $befor_unit_info                = Unit::find($unit_id);
+            $befor_unit_info->rent_status   = 0;
+            $befor_unit_info->save();
+        }
+
 
         return redirect()->route('rent.index')->with('success', 'Rent record updated successfully.');
     }
@@ -171,9 +210,31 @@ class RentController extends Controller
      * @param  \App\Models\Rent  $rent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rent $rent)
+    public function destroy($id)
     {
-        //
+        $rent                   = Rent::find($id);
+        $existingRentCollection = DB::table('rent_collection_histories')->where('rent_id', $rent->id)->exists();
+        $existingRentAdjust     = DB::table('rent_adjustments')->where('rent_id', $rent->id)->exists();
+        $user_statements        = DB::table('user_statements')->where('rent_id', $rent->id)->exists();
+        $existingRent           = DB::table('monthly_rents')->where('rent_id', $rent->id)->exists();
+
+        if ($existingRentAdjust > 1) {
+            return back()->with('failed', 'This rent is used in another table.');
+        }
+
+        if ($existingRent || $existingRentCollection || $user_statements) {
+            return back()->with('failed', 'This rent is used in another table.');
+        } else {
+
+
+            $unit               = Unit::find($rent->unit_id);
+            $unit->rent_status  = '0'; // status 0 meand avilable & 1 means rented.
+            $unit->save();
+
+            DB::table('rent_adjustments')->where('rent_id', $rent->id)->delete();
+            $rent->delete();
+            return back()->with('success', 'Deleted Successfully!');
+        }
     }
 
     public function IncreaseDecrease()
@@ -204,7 +265,7 @@ class RentController extends Controller
         $validatedData['user_id'] = Auth::user()->id;
         $validatedData['adjustment_date'] = $start_date;
         // dd($validatedData);
-        $rentAdjustment = RentAdjustment::create($validatedData);
+        RentAdjustment::create($validatedData);
 
         return redirect()->back()->with('success', 'Rent increased/decreased successfully.');
     }

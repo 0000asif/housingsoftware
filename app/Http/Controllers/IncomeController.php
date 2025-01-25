@@ -124,6 +124,6 @@ class IncomeController extends Controller
     {
         $income = IncomeExpence::find($id);
         $income->delete();
-        return redirect()->route('expence.index')->with("success", 'Income Deleted successfully.');
+        return redirect()->route('income.index')->with("success", 'Income Deleted successfully.');
     }
 }

@@ -15,6 +15,7 @@ class Unit extends Model
         'name',
         'info',
         'status',
+        'rent_status',
     ];
 
     public function user()

@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <form class=" form-success mb-4" method="post">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label class="">From <span class="material-icons"
                                             style="color: red;font-size: 10px;">star_rate</span></label>
@@ -25,7 +25,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label class="">To <span class="material-icons"
                                             style="color: red;font-size: 10px;">star_rate</span></label>
@@ -37,25 +37,23 @@
                             </div>
 
 
-                            {{-- <div class="col-md-3">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="">Project <span class="material-icons"
-                                            style="color: red;font-size: 10px;">name</span></label>
+                                    <label class="">House </label>
                                     <div class="md-form m-0">
-                                        <select name="staff" id="staff_id" class="form-control select2_demo">
-                                            <option value="">Select project</option>
-                                            @foreach ($staffs as $staff)
-                                                <option value="{{ $staff->id }}">{{ $staff->project_name }}</option>
+                                        <select name="project_id" id="project_id" class="form-control select2_demo">
+                                            <option value="">Select an option</option>
+                                            @foreach ($all_house as $staff)
+                                                <option value="{{ $staff->id }}">{{ $staff->house_name }} {{ $staff->address }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
-                                    <label class="">Category <span class="material-icons"
-                                            style="color: red;font-size: 10px;">name</span></label>
+                                    <label class="">Category</label>
                                     <div class="md-form m-0">
                                         <select name="category" id="category_id" class="form-control select2_demo">
                                             <option value="">Select category</option>
@@ -94,6 +92,8 @@
             var from_date = $('#from_date').val();
             var to_date = $('#to_date').val();
             var category_id = $('#category_id').val();
+            var category_id = $('#category_id').val();
+            var project_id = $('#project_id').val();
 
 
             if (from_date == '') {
@@ -120,6 +120,7 @@
                     from_date: from_date,
                     to_date: to_date,
                     category_id: category_id,
+                    project_id: project_id,
                 },
                 success: function(data) {
                     if (data == 'f1') {

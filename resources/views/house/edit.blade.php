@@ -48,7 +48,7 @@
                             <div class="col-12 col-md-6 col-lg-6">
                                 <div class="form-group mb-4">
                                     <label>Contract Number</label>
-                                    <input class="form-control" type="text" name="contract_number"
+                                    <input class="form-control" type="number" name="contract_number"
                                         value="{{ $info->contract_number }}">
                                 </div>
                             </div>

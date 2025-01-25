@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
+use App\Models\UserStatement;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentMethodController extends Controller
@@ -27,12 +28,12 @@ class PaymentMethodController extends Controller
             'name' => 'required',
             'branch_name' => 'nullable|string|max:255',
             'account_number' => 'required',
-            'balance' => 'nullable',
+            'balance' => 'required',
             'opening_date' => 'required',
         ]);
         $user_id = Auth::user()->id;
         $balance = $request->balance;
-        $opening_date = date("Y-m-d H:i", strtotime($request->opening_date));
+        $opening_date = date("Y-m-d", strtotime($request->opening_date));
 
         $data = $request->all();
         $data['user_id'] = $user_id;
@@ -55,12 +56,15 @@ class PaymentMethodController extends Controller
         }
 
         return redirect()->route('payment_method.index')->with('success', 'Payment Method addedd successfully');
-
     }
 
     public function destroy(string $id)
     {
-        $method = PaymentMethod::find($id);
+        $method          = PaymentMethod::find($id);
+        $user_statements = UserStatement::where('payment_method_id', $method->id)->exists();
+        if ($user_statements) {
+            return back()->with('failed', 'Method can not be deleted. It has user statements associated.');
+        }
         $method->delete();
         return redirect()->route('payment_method.index')->with('success', 'Method Delete Successfully');
     }

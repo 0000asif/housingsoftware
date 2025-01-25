@@ -14,7 +14,7 @@
                     <form class=" form-success mb-4" method="post">
                         <div class="row">
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="year">Select Year <span class="material-icons"
                                             style="color: red;font-size: 10px;">star_rate</span></label>
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="month">Select Month <span class="material-icons"
                                             style="color: red;font-size: 10px;">star_rate</span></label>
@@ -56,6 +56,20 @@
 
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label class="">House </label>
+                                    <div class="md-form m-0">
+                                        <select name="project_id" id="project_id" class="form-control select2_demo">
+                                            <option value="">Select an option</option>
+                                            @foreach ($houses as $staff)
+                                                <option value="{{ $staff->id }}">{{ $staff->house_name }} {{ $staff->address }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
                                     <label class="">Status <span class="material-icons"
                                             style="color: red;font-size: 10px;">name</span></label>
                                     <div class="md-form m-0">
@@ -74,7 +88,7 @@
                             </div>
 
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-block" id="report" type="submit"
                                         style="margin-top:28px">REPORTS</button>
@@ -103,6 +117,7 @@
                 var year = $('#year').val();
                 var month = $('#month').val();
                 var status = $('#status').val();
+                var project_id = $('#project_id').val();
 
                 // Validate year field
                 if (year === '') {
@@ -121,6 +136,7 @@
                         year: year,
                         month: month,
                         status: status,
+                        project_id: project_id,
                     },
                     success: function(response) {
                         // Hide loader

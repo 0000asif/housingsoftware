@@ -13,6 +13,7 @@
                 <thead>
                     <tr>
                         <td>S/L</td>
+                        <td>House</td>
                         <td>Name</td>
                         <td>Mobile</td>
                         <td>Total </td>
@@ -26,6 +27,7 @@
                     @foreach ($rent_report as $report)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $report->rent->house->house_name }} </td>
                             <td>{{ $report->rent->renter->name }} </td>
                             <td>{{ $report->rent->renter->phone }}</td>
                             <td>{{ $report->total_amount }}</td>
@@ -46,7 +48,7 @@
 
                 <tfoot>
                     <tr>
-                        <td colspan="3"><strong>Total:</strong></td>
+                        <td colspan="4"><strong>Total:</strong></td>
                         <td><strong>
                                 {{ number_format($rent_report->sum('total_amount'), 2) }}
                             </strong>

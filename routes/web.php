@@ -160,15 +160,7 @@ Route::middleware('auth')->group(function () {
 
     // ------ Rent Rent report ---------
     Route::get('/rent-report', [ReportController::class, 'rentreport'])->name('rent.report');
-
     Route::get('getrentreport', [ReportController::class, 'GetrentReport']);
-
-
-
-
-
-
-
 
 
     //Abdullah project Coaching management

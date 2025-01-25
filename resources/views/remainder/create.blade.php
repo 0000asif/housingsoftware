@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-6">
                             <div class="form-group mb-4">
-                                <label for="title">Select Renter<span style="color: red;">*</span></label>
+                                <label for="title">Select Renter</label>
                                 <select name="renter_id" id="renter_id" class="form-control select2_demo">
                                     <option value="">Select an Option</option>
                                     @foreach ($renters as $item)

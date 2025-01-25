@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Renter;
+use App\Models\Remainder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 class RenterController extends Controller
 {
@@ -42,8 +43,7 @@ class RenterController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
-            'nid' => 'required|string|unique:renters,nid',
-            'phone' => 'required|string',
+            'phone' => 'required|string|unique:renters,phone',
             'gender' => 'required|string|in:male,female,other',
             'birth_date' => 'nullable|date',
             'regnumber' => 'nullable|string|max:255',
@@ -59,7 +59,6 @@ class RenterController extends Controller
         //     $logoName = time() . '.' . $request->photo->extension();
         //     $request->photo->move(public_path('image/photoGalery'), $logoName);
         // }
-
 
         //add pdf file to the folder and store also database
         if ($request->hasFile('pdf_file')) {
@@ -155,12 +154,11 @@ class RenterController extends Controller
      */
     public function destroy(Renter $renter)
     {
-        $isUsedInPayments = DB::table('renter_payments')->where('renter_id', $renter->id)->exists();
-        $isUsedInOtherTable = DB::table('other_table')->where('renter_id', $renter->id)->exists();
-
-        if ($isUsedInPayments || $isUsedInOtherTable) {
+        $isUsedInRents = DB::table('rents')->where('renter_id', $renter->id)->exists();
+        $isUsedNote = Remainder::where('renter_id', $renter->id)->exists();
+        if ($isUsedInRents || $isUsedNote) {
             return redirect()->route('renter.index')
-                ->with('error', 'Cannot delete this renter as it is linked to other records.');
+                ->with('failed', 'Cannot delete this renter as it is linked to other records.');
         }
 
         $renter->delete();

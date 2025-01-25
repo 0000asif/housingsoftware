@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <form class=" form-success mb-4" method="post">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label class="">From <span class="material-icons"
                                             style="color: red;font-size: 10px;">star_rate</span></label>
@@ -25,13 +25,27 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label class="">To <span class="material-icons"
                                             style="color: red;font-size: 10px;">star_rate</span></label>
                                     <div class="md-form m-0">
                                         <input class="form-control datetimepicker_5" type="text" id="to_date"
                                             name="to_date" value="{{ date('Y-m-d') }}" placeholder="Select date" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="">House </label>
+                                    <div class="md-form m-0">
+                                        <select name="project_id" id="project_id" class="form-control select2_demo">
+                                            <option value="">Select an option</option>
+                                            @foreach ($all_house as $staff)
+                                                <option value="{{ $staff->id }}">{{ $staff->house_name }} {{ $staff->address }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +68,7 @@
                             </div>
 
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-block" id="report" type="submit"
                                         style="margin-top:28px">REPORTS</button>
@@ -81,6 +95,7 @@
             var from_date = $('#from_date').val();
             var to_date = $('#to_date').val();
             var staff_data = $('#staff_data').val();
+            var project_id = $('#project_id').val();
 
             if (from_date == '') {
                 alert('Select From Date');
@@ -106,6 +121,7 @@
                     from_date: from_date,
                     to_date: to_date,
                     staff_data: staff_data,
+                    project_id: project_id,
                 },
                 success: function(data) {
                     if (data == 'f1') {

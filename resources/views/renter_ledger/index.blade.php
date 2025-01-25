@@ -15,9 +15,9 @@
                             <tr>
                                 <th>SL</th>
                                 <th>Renter Name</th>
-                                <th>Payment Date</th>
-                                <th>Amount Paid</th>
-                                <th>Balance</th>
+                                <th>Mobile</th>
+                                <th>Rent </th>
+                                <th>Agreement Date</th>
                                 <th>Notes</th>
                                 <th>Action</th>
                             </tr>
@@ -28,10 +28,10 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $ledger->rent->renter->name ?? 'N/A' }}</td>
-                                    <td>{{ $ledger->payment_date }}</td>
-                                    <td>{{ number_format($ledger->amount_paid, 2) }}</td>
-                                    <td>{{ number_format($ledger->balance, 2) }}</td>
-                                    <td>{{ $ledger->notes }}</td>
+                                    <td>{{ $ledger->rent->renter->phone ?? 'N/A' }}</td>
+                                    <td>{{ $ledger->monthlyRent->total_amount ?? 'N/A' }}</td>
+                                    <td>{{ date('d M Y', strtotime($ledger->rent->rent_date)) ?? 'N/A' }}</td>
+                                    <td>{{ $ledger->notes ?? 'N/A' }}</td>
                                     <td>
                                         <a href="{{ route('renter.ledger.show', $ledger->monthly_rent_id) }}"
                                             class="btn btn-info">Full Ledger</a>

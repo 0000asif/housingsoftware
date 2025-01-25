@@ -72,7 +72,7 @@ class HouseController extends Controller
         $data['status'] = '1';
 
         House::create($data);
-        return redirect()->back()->with('success', 'Operation completed successfully!');
+        return redirect()->back()->with('success', 'Operation complete successfully!');
     }
 
     /**
@@ -113,7 +113,7 @@ class HouseController extends Controller
         $request->validate([
             'house_name' => 'required',
             'owner_name' => 'nullable',
-            'contract_number' => 'nullable',
+            'contract_number' => 'nullable|numeric',
             'address' => 'required',
             'status' => 'required',
             'land_info' => 'nullable',
@@ -157,13 +157,12 @@ class HouseController extends Controller
 
         $isUsedInFloor = DB::table('floors')->where('house_id', $house->id)->exists();
         $isUsedInUnit = DB::table('units')->where('house_id', $house->id)->exists();
+        $isUsedInRent = DB::table('rents')->where('house_id', $house->id)->exists();
 
-        if ($isUsedInFloor || $isUsedInUnit) {
-            return redirect()->back()
+        if ($isUsedInFloor || $isUsedInUnit || $isUsedInRent) {
+            return back()
                 ->with('error', 'Cannot delete this it is linked to other records.');
         }
-
-
         $house->delete();
         if ($house->document) {
             $image_2_file = "public/images/house/" . $house->document;
@@ -171,6 +170,6 @@ class HouseController extends Controller
                 unlink($image_2_file);
             }
         }
-        return redirect()->back()->with('success', 'Operation completed successfully!');
+        return back()->with('success', 'Operation completed successfully!');
     }
 }

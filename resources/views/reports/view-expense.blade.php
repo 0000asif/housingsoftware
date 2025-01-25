@@ -12,6 +12,7 @@
                 <thead>
                     <tr>
                         <td>S/L</td>
+                        <td>House Name</td>
                         <td>Category Name</td>
                         <td>Expense Amount</td>
                         <td>Date</td>
@@ -22,6 +23,7 @@
                     @foreach ($expense_report as $expense_head)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $expense_head->house ? $expense_head->house->house_name : '' }}</td>
                             <td>{{ $expense_head->category->name }}</td>
                             <td>{{ $expense_head->expence_amount }}</td>
                             <td>{{ date('d-m-Y', strtotime($expense_head->date)) }}</td>
@@ -31,7 +33,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="2"><strong>Total:</strong></td>
+                        <td colspan="3"><strong>Total:</strong></td>
                         <td><strong>{{ number_format($expense_report->sum('expence_amount'), 2) }}</strong></td>
                         <td colspan="2"></td>
                     </tr>

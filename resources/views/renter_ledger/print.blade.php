@@ -143,9 +143,18 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $entry->payment_date }}</td>
                             <td>{{ $entry->id }}</td>
-                            <td>{{ \Carbon\Carbon::parse($entry->payment_date)->format('F') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($entry->payment_date)->year }}</td>
-                            <td>{{ number_format($rent->total_amount, 2) }}</td>
+                            <td>
+                                {{ \Carbon\Carbon::create()->month($entry->monthlyRent->month)->format('F') }}
+                            </td>
+
+                            <td>{{ $entry->monthlyRent->year }}</td>
+                            <td>
+                                @if ($entry->payable_amount == null)
+                                    {{ number_format(0, 2) }}
+                                @else
+                                    {{ number_format($entry->payable_amount, 2) }}
+                                @endif
+                            </td>
                             <td>{{ number_format($entry->amount_paid, 2) }}</td>
                             <td>{{ number_format($entry->balance, 2) }}</td>
                         </tr>

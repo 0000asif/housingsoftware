@@ -13,7 +13,8 @@
                 <thead>
                     <tr>
                         <td>S/L</td>
-                        <td> Name</td>
+                        <td>House</td>
+                        <td>Name</td>
                         <td>Mobile</td>
                         <td>Payment Amount</td>
                         <td>Payment Method</td>
@@ -24,6 +25,7 @@
                     @foreach ($salary_report as $report)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $report->rent->house->house_name }}</td>
                             <td>{{ $report->monthly_rent->rent->renter->name }} </td>
                             <td>{{ $report->monthly_rent->rent->renter->phone }}</td>
                             <td>{{ $report->amount_paid }}</td>
@@ -37,7 +39,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="3"><strong>Total:</strong></td>
+                        <td colspan="4"><strong>Total:</strong></td>
                         <td><strong>{{ number_format($salary_report->sum('amount_paid'), 2) }}</strong></td>
                         <td></td>
                         <td></td>

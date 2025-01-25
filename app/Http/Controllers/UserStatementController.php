@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MonthlyRent;
+use App\Models\RentAdjustment;
 use Illuminate\Http\Request;
 use App\Models\UserStatement;
 use Illuminate\Routing\Controller;
@@ -14,9 +15,20 @@ class UserStatementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // {
+    //     // $ledgers = UserStatement::with(['rent', 'monthlyRent'])->get(); // Fetch data with relationships if needed
+    //     $ledgers = UserStatement::pluck('rent_id', 'id');
+    //     dd($ledgers);
+    //     return view('renter_ledger.index', compact('ledgers'));
+    // }
+
+
     public function index()
     {
-        $ledgers = UserStatement::with(['rent', 'monthlyRent'])->get(); // Fetch data with relationships if needed
+        // Fetch all and filter unique rent_id
+        $ledgers = UserStatement::with(['rent.renter', 'monthlyRent'])->get()->unique('rent_id');
+
         return view('renter_ledger.index', compact('ledgers'));
     }
 
@@ -50,10 +62,11 @@ class UserStatementController extends Controller
      */
     public function show($agreementId)
     {
-        $rent = MonthlyRent::with('rent')->findOrFail($agreementId); // Fetch agreement details
-        $ledger = UserStatement::where('monthly_rent_id', $agreementId)->get(); // Fetch ledger entries
-
-        return view('renter_ledger.show', compact('rent', 'ledger'));
+        $rent   = MonthlyRent::with('rent')->find($agreementId);
+        $rentAdjust = RentAdjustment::where('rent_id', $rent->rent_id)->orderBy('created_at', 'desc')->first();
+        $ledger = UserStatement::where('rent_id', $rent->rent_id)->get();
+        // dd($rentAdjust);
+        return view('renter_ledger.show', compact('rent', 'ledger', 'rentAdjust'));
     }
 
 
@@ -93,8 +106,8 @@ class UserStatementController extends Controller
 
     public function print($agreementId)
     {
-        $rent = MonthlyRent::with('rent')->findOrFail($agreementId); // Fetch agreement details
-        $ledger = UserStatement::where('monthly_rent_id', $agreementId)->get(); // Fetch ledger entries
+        $rent = MonthlyRent::with('rent')->find($agreementId); // Fetch agreement details
+        $ledger = UserStatement::where('rent_id', $rent->rent_id)->get(); // Fetch ledger entries
 
         return view('renter_ledger.print', compact('rent', 'ledger'));
     }

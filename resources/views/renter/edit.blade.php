@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="phone" class="form-label">Phone<span style="color: red;">*</span></label>
-                                <input type="tel" id="phone" name="phone" value="{{ $renter->phone }}"
+                                <input type="number" id="phone" name="phone" value="{{ $renter->phone }}"
                                     class="form-control">
                             </div>
                         </div>

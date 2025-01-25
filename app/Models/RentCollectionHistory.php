@@ -22,6 +22,11 @@ class RentCollectionHistory extends Model
         'status'
     ];
 
+    public function rent()
+    {
+        return $this->belongsTo(Rent::class, 'rent_id');
+    }
+
     public function monthly_rent()
     {
         return $this->belongsTo(MonthlyRent::class, 'monthly_rent_id');

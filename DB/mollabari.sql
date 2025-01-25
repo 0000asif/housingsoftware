@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2025 at 06:44 AM
+-- Generation Time: Jan 25, 2025 at 03:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,15 +41,6 @@ CREATE TABLE `bank_transactions` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `bank_transactions`
---
-
-INSERT INTO `bank_transactions` (`id`, `user_id`, `payment_method_id`, `reference`, `amount`, `date`, `image`, `note`, `type`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, '133', 2.00, '1973-02-04 00:00:00', '1734605702.png', 'Quia enim vitae sunt', 1, '2024-12-19 04:55:02', '2024-12-19 04:55:02'),
-(2, 2, 2, '192', 97.00, '2010-07-16 00:00:00', '1734606584.jpg', 'Eum perferendis Nam', 2, '2024-12-19 05:09:44', '2024-12-19 05:09:44'),
-(3, 2, 1, '674', 59.00, '1987-11-29 00:00:00', NULL, 'Numquam amet explic', 1, '2024-12-19 05:24:05', '2024-12-19 05:24:05');
-
 -- --------------------------------------------------------
 
 --
@@ -79,14 +70,6 @@ CREATE TABLE `designations` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `designations`
---
-
-INSERT INTO `designations` (`id`, `user_id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Manager', '2024-12-12 05:19:39', '2024-12-12 05:19:39'),
-(2, 2, 'Gateman', '2024-12-12 05:19:47', '2024-12-12 05:19:47');
-
 -- --------------------------------------------------------
 
 --
@@ -109,14 +92,6 @@ CREATE TABLE `employees` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `employees`
---
-
-INSERT INTO `employees` (`id`, `user_id`, `designation_id`, `name`, `email`, `phone`, `image`, `salary`, `join_date`, `join_month`, `join_year`, `description`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 'AB Rohim', 'rohim@gmail.com', '01580431245', '1734002478.jpg', 15500.00, '2010-12-25 00:00:00', 12, 2010, NULL, '2024-12-12 05:21:18', '2024-12-12 05:23:42'),
-(2, 2, 2, 'kuddus', 'kuddus@gmail.com', '01231891069', '1734002540.jpg', 10200.00, '2016-12-24 00:00:00', 12, 2016, NULL, '2024-12-12 05:22:20', '2024-12-12 05:23:51');
 
 -- --------------------------------------------------------
 
@@ -156,10 +131,7 @@ CREATE TABLE `floors` (
 --
 
 INSERT INTO `floors` (`id`, `user_id`, `house_id`, `name`, `info`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 'Ground Floor', NULL, 1, '2024-12-12 03:45:14', '2024-12-12 03:45:14'),
-(2, 2, 1, '1st Floor', NULL, 1, '2024-12-12 03:45:38', '2024-12-12 03:45:38'),
-(3, 2, 1, '2nd Floor', 'This is master bari second floor.', 1, '2024-12-12 03:49:22', '2024-12-12 03:49:22'),
-(4, 2, 2, 'only floor', 'There are have only one floor', 1, '2024-12-12 04:21:17', '2024-12-12 04:21:17');
+(1, 2, 1, 'Floor 02', 'সর্বমোট ১২টা রুম আছে , এর মধ্যে এটাস্টবাথ বিশিষ্ট রুম-০৪টা, কমন বাথরুম আছে-০৩টা।', 1, '2025-01-13 01:12:52', '2025-01-13 01:12:52');
 
 -- --------------------------------------------------------
 
@@ -188,8 +160,7 @@ CREATE TABLE `houses` (
 --
 
 INSERT INTO `houses` (`id`, `user_id`, `house_name`, `owner_name`, `contract_number`, `holding_number`, `address`, `land_info`, `opening_balance`, `document`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Master_bari', 'Md Asif Hossain', '01758040074', '496', 'Teashia, Belkuchi Sirajgonj. house no. 496.', 'Bangladesh', 5000, NULL, 1, '2024-12-12 03:41:27', '2024-12-12 03:41:27'),
-(2, 2, 'Fokir\'s house', 'Md Anamul Hasan', '01812925072', '495', 'Belkuchi Sirajganj.', 'Bangladesh', 14000, NULL, 1, '2024-12-12 03:44:26', '2024-12-12 03:44:26');
+(1, 2, 'হাজী-মার্কেট কর্মজীবী ও ছাত্র নিবাস ব্যাচেলর মেছ', NULL, '01721066352', '03', 'প্রেম বাগান,হাজী-মার্কেট,শহীদ লতিফ রোড,দক্ষিণখান,ঢাকা-১২৩০।', 'দাগ-১৭৮।', 0, NULL, 1, '2025-01-13 01:11:22', '2025-01-13 01:11:22');
 
 -- --------------------------------------------------------
 
@@ -213,14 +184,6 @@ CREATE TABLE `income_expences` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `income_expences`
---
-
-INSERT INTO `income_expences` (`id`, `user_id`, `income_expence_category_id`, `payment_method_id`, `house_id`, `date`, `reference`, `income_amount`, `expence_amount`, `note`, `type`, `created_at`, `updated_at`) VALUES
-(1, 2, 2, 2, NULL, '2024-12-12 00:00:00', 'Arnob gosh', 4000.00, NULL, 'thik somoy moto pawa jacce na tk', 1, '2024-12-12 05:18:38', '2024-12-12 05:18:38'),
-(2, 2, 1, 1, NULL, '2024-12-12 00:00:00', 'Arnob gosh', NULL, 500.00, 'Bathroom er gizer', 2, '2024-12-12 05:19:26', '2024-12-12 05:19:26');
-
 -- --------------------------------------------------------
 
 --
@@ -241,8 +204,7 @@ CREATE TABLE `income_expence_categories` (
 --
 
 INSERT INTO `income_expence_categories` (`id`, `user_id`, `name`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Repair', 1, '2024-12-12 05:15:02', '2024-12-12 05:15:02'),
-(2, 2, 'Rent', 1, '2024-12-12 05:15:11', '2024-12-12 05:15:11');
+(2, 2, 'GES BILL HAZI-MARKET MESS', 1, '2025-01-13 03:30:43', '2025-01-13 03:30:43');
 
 -- --------------------------------------------------------
 
@@ -290,7 +252,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (34, '2024_11_26_040228_create_salary_records_table', 17),
 (35, '2024_12_18_092934_create_remainders_table', 18),
 (36, '2024_12_19_065019_create_bank_transactions_table', 19),
-(37, '2024_12_21_042241_create_user_statements_table', 20);
+(37, '2024_12_21_042241_create_user_statements_table', 20),
+(38, '2025_01_02_113712_create_rent_adjustments_table', 21);
 
 -- --------------------------------------------------------
 
@@ -580,11 +543,10 @@ CREATE TABLE `monthly_rents` (
 --
 
 INSERT INTO `monthly_rents` (`id`, `user_id`, `rent_id`, `month`, `year`, `total_amount`, `advance_amount`, `collection_amount`, `note`, `date`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 11, 2024, 8000.00, 0.00, 4000.00, NULL, '2024-12-12 00:00:00', 1, '2024-12-12 05:05:15', '2024-12-12 05:10:33'),
-(2, 2, 2, 12, 2024, 5000.00, 0.00, 2000.00, NULL, '2024-12-12 00:00:00', 1, '2024-12-12 05:05:30', '2024-12-12 05:13:40'),
-(3, 2, 1, 12, 2024, 8000.00, 0.00, 0.00, NULL, '2024-12-21 00:00:00', 0, '2024-12-21 00:01:23', '2024-12-21 00:01:23'),
-(4, 2, 3, 12, 2024, 13000.00, 0.00, 10050.00, NULL, '2024-12-21 00:00:00', 1, '2024-12-21 00:01:23', '2025-01-01 05:35:45'),
-(5, 2, 4, 12, 2024, 12500.00, 0.00, 2500.00, NULL, '2024-12-21 00:00:00', 1, '2024-12-21 00:01:23', '2024-12-24 07:06:24');
+(1, 2, 1, 1, 2025, 4800.00, 0.00, 0.00, NULL, '2025-01-01 00:00:00', 2, '2025-01-13 03:07:57', '2025-01-17 13:50:29'),
+(2, 2, 2, 1, 2025, 4000.00, 0.00, 0.00, NULL, '2025-01-01 00:00:00', 2, '2025-01-13 03:07:57', '2025-01-17 13:50:23'),
+(11, 2, 3, 1, 2025, 4800.00, 0.00, 0.00, NULL, '2025-01-01 00:00:00', 2, '2025-01-13 07:06:38', '2025-01-17 13:50:14'),
+(12, 2, 4, 1, 2025, 2250.00, 0.00, 0.00, NULL, '2025-01-01 00:00:00', 2, '2025-01-13 07:06:38', '2025-01-17 13:48:37');
 
 -- --------------------------------------------------------
 
@@ -621,8 +583,10 @@ CREATE TABLE `payment_methods` (
 --
 
 INSERT INTO `payment_methods` (`id`, `user_id`, `name`, `branch_name`, `account_number`, `balance`, `opening_date`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Bkash', NULL, '01758040074', 1250.00, '2024-12-12 00:00:00', '2024-12-12 04:42:23', '2024-12-12 04:42:23'),
-(2, 2, 'Nagad', NULL, '01758040074', 2000.00, '2024-12-12 00:00:00', '2024-12-12 04:56:51', '2024-12-12 04:56:51');
+(1, 2, 'CASH', NULL, '0', 0.00, '2025-01-01 00:00:00', '2025-01-13 03:11:48', '2025-01-13 03:11:48'),
+(2, 2, 'BKASH', NULL, '0', 0.00, '2025-01-01 00:00:00', '2025-01-13 03:13:02', '2025-01-13 03:13:02'),
+(3, 2, 'NAGAD', NULL, '0', 0.00, '2025-01-01 00:00:00', '2025-01-13 03:13:18', '2025-01-13 03:13:18'),
+(4, 2, 'ROCKET', NULL, '0', 0.00, '2025-01-01 00:00:00', '2025-01-13 03:13:29', '2025-01-13 03:13:29');
 
 -- --------------------------------------------------------
 
@@ -743,16 +707,6 @@ CREATE TABLE `remainders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `remainders`
---
-
-INSERT INTO `remainders` (`id`, `user_id`, `renter_id`, `note`, `date`, `status`, `created_at`, `updated_at`) VALUES
-(2, 2, 2, 'Non eveniet quos au', '2025-12-19 00:00:00', 1, '2024-12-18 04:39:50', '2024-12-18 04:39:50'),
-(3, 2, 1, 'Et unde lorem dolore', '2011-04-28 00:00:00', 2, '2024-12-18 04:44:28', '2024-12-18 04:44:40'),
-(5, 2, NULL, 'newly worked in here', '2024-12-23 00:00:00', 1, '2024-12-23 09:49:54', '2024-12-23 09:49:54'),
-(6, 2, 5, 'Dicta aut necessitat', '2001-02-06 00:00:00', 1, '2024-12-23 09:50:20', '2024-12-23 09:50:20');
-
 -- --------------------------------------------------------
 
 --
@@ -764,7 +718,7 @@ CREATE TABLE `renters` (
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `nid` varchar(255) NOT NULL,
+  `nid` varchar(255) DEFAULT NULL,
   `phone` varchar(255) NOT NULL,
   `gender` varchar(255) NOT NULL,
   `birth_date` date DEFAULT NULL,
@@ -785,11 +739,10 @@ CREATE TABLE `renters` (
 --
 
 INSERT INTO `renters` (`id`, `user_id`, `name`, `email`, `nid`, `phone`, `gender`, `birth_date`, `regnumber`, `occupation`, `institute`, `other_info`, `pdf_file`, `address`, `status`, `note`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Arnob Vai', 'arnob@gmail.com', '6464600151', '015804312445', 'male', '1997-06-19', '1990881154109650', 'Developer', 'It Plan BD', NULL, NULL, 'Kalibar sirajgonj sadar', 1, NULL, '2024-12-12 05:01:35', '2024-12-12 05:01:35'),
-(2, 2, 'Abdullah shake', NULL, '6368875464', '01717404302', 'male', '1970-01-01', NULL, 'Laravel Developer', NULL, NULL, NULL, 'Arongail tarash', 1, NULL, '2024-12-12 05:02:44', '2024-12-12 05:02:44'),
-(3, 2, 'Beverly Bush', 'dizelap@mailinator.com', '19', '+1 (732) 766-9662', 'male', '1999-04-17', '857', 'Omnis mollitia cupid', 'Serina Pruitt', 'Pariatur Aliquip an', NULL, 'Voluptatibus id eve', 1, NULL, '2024-12-23 05:45:30', '2024-12-23 05:45:30'),
-(4, 2, 'Britanni Greene', 'jowurixune@mailinator.com', '97', '+1 (248) 173-3918', 'female', '1991-08-22', '272', 'Magna molestias inci', 'Rooney Hines', 'Quae exercitationem', NULL, 'Quas quod quia cumqu', 1, 'Consequat Est deser', '2024-12-23 05:46:15', '2024-12-23 05:46:15'),
-(5, 2, 'Meghan Jackson', 'xujimyw@mailinator.com', '52', '+1 (278) 166-3856', 'other', '1973-04-05', '940', 'Qui commodi labore q', 'Shellie Mccall', 'Doloribus quo est qu', '1734937004.pdf', 'Non eligendi omnis q', 1, 'Aliquam veniam eaqu', '2024-12-23 06:10:52', '2024-12-23 06:59:25');
+(1, 2, 'PROKASH CHANDRA SARKER', NULL, '3753175797', '01947686036', 'male', '1997-01-08', NULL, 'চাকুরী।', 'ব্রাক ব্যাংক,দক্ষিণ খান ঢাকা।', 'বড় ভাই মোবাইল:01942874068', '1736753026.pdf', 'বাসা:৫০৯,গ্রাম:দুর্গাপুর মধ্যপাড়া,ডাকঘর:সাকাশ্বর-১৭৫০,থানা:কালিয়াকৈর,গাজীপুর।', 1, 'Mamber-02\r\nName: Sohanur Rahman. Phone:01811865715. NID:8216741267. Date of Birth:16-MAR-1995. \r\nOccupation & Institute Name:চাকুরী ব্রাক ব্যাংক দক্ষিণখান শাখা। Permanent Address: বাসা:৫১/০৪.গ্রাম:হাজী-সলিমুল্লাহ,শ্যামপুর(অংশ),ডাকঘর:ফরিদাবাদ-১২০৪,থানা:কদমতলী,ঢাকা। Emergency Contact:বাবা মোবাইল:01717076256', '2025-01-13 01:23:46', '2025-01-17 14:08:48'),
+(2, 2, 'MD. ASHIEK AHAMED.', NULL, '2691650146968', '01834050935', 'male', '1988-05-31', NULL, 'চাকুরী ATS ফেশন গারমেন্স।', 'ATS ফেশন গারমেন্স।', 'স্ত্রী মোবাইল:01734421027', '1736754569.pdf', 'গ্রাম:শাহপুর আমলাসদর, ডাকঘর:মন্ডলপাড়া, থানা:মিরপুর, কুষ্টিয়া।', 1, 'Mamber-02\r\nName: Md. Naim Uddin. Phone:01610763021. NID:3314902085. Date of Birth:09-JUN-2001. \r\nOccupation & Institute Name:চাকুরী কল সেন্টার উত্তরা সেক্টর-০৪ রোড-০১, বাসা-১০।, Permanent Address: গ্রাম:রানী শিমুল,দক্ষণপাড়া, ডাকঘর:শ্রীবর্দী, থানা:শ্রীবর্দী,শেরপুর। Emergency Contact:বাবা মোবাইল:01931844366.', '2025-01-13 01:49:29', '2025-01-13 01:52:46'),
+(3, 2, 'MD. JAHIDUL ISLAM', NULL, '0', '01737699194', 'male', '1984-01-01', '19844421604145925', 'চাকুরী', 'UCB BANK GUN MANE দক্ষিনখান ঢাকা ১২৩০।', 'বাবা মোবাইল:01747243737', '1736756488.pdf', 'গ্রাম:বেপারীপাড়া,ডাকঘর:ঝিনাইদহ-৭৩০০,থানা:ঝিনাইদহ সদর,খুলনা।', 1, 'Mamber-02\r\nName: Akram. Phone:01706351562. NID:7357184642. Date of Birth:17-JUL-1983. \r\nOccupation & Institute Name:রাইড শেয়ার।, Permanent Address: গ্রাম:পশ্চিমপাড়া, ডাকঘর:কুমিরাদহ-৭৩২০,থানা:শেলকুপা,ঝিনাইদহ। Emergency Contact:বাবা মোবাইল:01732611525', '2025-01-13 02:21:28', '2025-01-13 02:21:28'),
+(4, 2, 'MD. EMDADUL HAQUE', NULL, '19876116516000088', '01916573988', 'male', '1987-03-02', NULL, 'চাকুরী', 'ATS Jeans wear Pvt: মোল্লারটেক।', 'মা মোবাইল:01734815793.', '1736758235.pdf', 'কোনা গাঁও, থানা:মুক্তাগাছা, জেলা:ময়মনসিংহ।', 1, NULL, '2025-01-13 02:50:35', '2025-01-17 13:57:59');
 
 -- --------------------------------------------------------
 
@@ -827,14 +780,50 @@ CREATE TABLE `rents` (
 --
 
 INSERT INTO `rents` (`id`, `user_id`, `renter_id`, `rent_date`, `house_id`, `floor_id`, `unit_id`, `monthly_rent`, `electracity_bill`, `water_bill`, `gas_bill`, `gatmanbill`, `lift_bill`, `car_reg_no`, `quantity`, `garage_bill`, `service_charge`, `advance`, `member`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, '2024-12-12', 1, 2, 2, 8000.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-12-12 05:03:37', '2024-12-12 05:03:37'),
-(2, 2, 2, '2024-12-01', 2, 4, 5, 5000.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2024-12-12 05:04:49', '2024-12-21 11:46:41'),
-(3, 2, 2, '2024-12-19', 1, 2, 3, 12500.00, 200.00, 300.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2024-12-18 23:20:19', '2024-12-18 23:28:49'),
-(4, 2, 1, '2024-12-01', 1, 2, 3, 12500.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2024-12-18 23:22:17', '2024-12-18 23:27:03'),
-(5, 2, 4, '1975-09-26', 1, 2, 3, 1.00, 64.00, 52.00, 84.00, 94.00, 26.00, '47', 347, 79.00, 7.00, 86.00, NULL, 0, '2024-12-23 05:47:11', '2024-12-23 07:18:38'),
-(6, 2, 1, '2019-06-16', 1, 2, 3, 9.00, 97.00, 80.00, 97.00, 89.00, 42.00, '15', 51, 65.00, 42.00, 65.00, 3.00, 1, '2024-12-23 07:19:10', '2024-12-23 07:23:15'),
-(7, 2, 4, '1991-12-30', 1, 3, 4, 10.00, 26.00, 87.00, 63.00, 31.00, 30.00, '9', 505, 98.00, 14.00, 11.00, 44.00, 1, '2024-12-25 05:11:14', '2024-12-25 05:11:14'),
-(8, 2, 5, '1980-02-25', 1, 3, 6, 12.00, 8.00, 55.00, 29.00, 24.00, 57.00, '84', 882, 39.00, 23.00, 51.00, 12.00, 0, '2025-01-01 04:42:06', '2025-01-01 04:42:28');
+(1, 2, 1, '2024-11-01', 1, 1, 1, 4800.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2.00, 0, '2025-01-13 01:26:47', '2025-01-18 01:20:55'),
+(2, 2, 2, '2024-07-01', 1, 1, 2, 4000.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2.00, 1, '2025-01-13 02:29:23', '2025-01-13 02:38:56'),
+(3, 2, 3, '2024-10-01', 1, 1, 3, 4800.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2.00, 1, '2025-01-13 02:40:13', '2025-01-13 02:40:13'),
+(4, 2, 4, '2024-11-01', 1, 1, 4, 2250.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2.00, 0, '2025-01-13 03:03:08', '2025-01-14 00:23:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rent_adjustments`
+--
+
+CREATE TABLE `rent_adjustments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `rent_id` bigint(20) UNSIGNED NOT NULL,
+  `renter_id` bigint(20) UNSIGNED NOT NULL,
+  `adjustment_date` date NOT NULL,
+  `month` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+  `monthly_rent` decimal(10,2) NOT NULL,
+  `electracity_bill` decimal(10,2) DEFAULT NULL,
+  `water_bill` decimal(10,2) DEFAULT NULL,
+  `gas_bill` decimal(10,2) DEFAULT NULL,
+  `gatmanbill` decimal(10,2) DEFAULT NULL,
+  `lift_bill` decimal(10,2) DEFAULT NULL,
+  `garage_bill` decimal(10,2) DEFAULT NULL,
+  `service_charge` decimal(10,2) DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `rent_adjustments`
+--
+
+INSERT INTO `rent_adjustments` (`id`, `user_id`, `rent_id`, `renter_id`, `adjustment_date`, `month`, `year`, `monthly_rent`, `electracity_bill`, `water_bill`, `gas_bill`, `gatmanbill`, `lift_bill`, `garage_bill`, `service_charge`, `note`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 1, '2025-01-13', 11, 2024, 4800.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-13 01:26:47', '2025-01-13 02:30:51'),
+(2, 2, 2, 2, '2025-01-13', 7, 2024, 4000.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-13 02:29:23', '2025-01-13 02:41:52'),
+(3, 2, 3, 3, '2025-01-13', 10, 2024, 4800.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-13 02:40:13', '2025-01-13 02:40:13'),
+(4, 2, 4, 4, '2025-01-14', 11, 2024, 2250.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-13 03:03:08', '2025-01-14 00:23:38'),
+(6, 2, 1, 1, '2025-02-01', 2, 2025, 4500.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-13 06:56:53', '2025-01-13 06:56:53'),
+(7, 2, 1, 1, '2025-02-01', 2, 2025, 4500.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-13 07:25:25', '2025-01-13 07:25:25'),
+(8, 2, 1, 1, '2025-02-01', 2, 2025, 4800.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-13 07:27:31', '2025-01-13 07:27:31');
 
 -- --------------------------------------------------------
 
@@ -851,24 +840,12 @@ CREATE TABLE `rent_collection_histories` (
   `month` int(11) NOT NULL,
   `year` int(11) NOT NULL,
   `payment_method` varchar(255) DEFAULT NULL,
-  `invoice` int(20) NOT NULL,
+  `invoice` int(11) NOT NULL,
   `notes` text DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1:partial payment \r\n2:full payment',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `rent_collection_histories`
---
-
-INSERT INTO `rent_collection_histories` (`id`, `monthly_rent_id`, `rent_id`, `amount_paid`, `payment_date`, `month`, `year`, `payment_method`, `invoice`, `notes`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 4000.00, '2024-12-12', 1, 2025, 'Bkash', 1734001833, 'half paid', 1, '2024-12-12 05:10:33', '2024-12-12 05:10:33'),
-(2, 2, 1, 2000.00, '2024-12-12', 3, 2024, 'Nagad', 1734002020, 'Beton pay e nai', 1, '2024-12-12 05:13:40', '2024-12-12 05:13:40'),
-(3, 4, 3, 10000.00, '2024-12-21', 2, 2024, 'Bkash', 1734775006, 'onk deri hoiya gelo', 1, '2024-12-21 03:56:46', '2024-12-21 03:56:46'),
-(4, 5, 4, 500.00, '2024-12-24', 4, 2024, 'Bkash', 1735019476, 'Labore modi et lorem', 1, '2024-12-24 05:51:16', '2024-12-24 05:51:16'),
-(5, 5, 4, 2000.00, '2024-12-24', 5, 2025, 'Bkash', 1735023983, 'onk note e ache bole gelam na', 1, '2024-12-24 07:06:23', '2024-12-24 07:06:23'),
-(6, 4, 3, 50.00, '2009-06-03', 4, 2029, 'Bkash', 1735709745, 'Magna consequat Vel', 1, '2025-01-01 05:35:45', '2025-01-01 05:35:45');
 
 -- --------------------------------------------------------
 
@@ -966,14 +943,6 @@ CREATE TABLE `salary_records` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `salary_records`
---
-
-INSERT INTO `salary_records` (`id`, `user_id`, `employee_id`, `payment_method_id`, `payment_month`, `payment_year`, `salary_amount`, `status`, `payment_date`, `note`, `bonous`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 1, 12, 2024, 2000.00, 1, '2024-12-12 00:00:00', NULL, NULL, '2024-12-12 05:24:26', '2024-12-12 05:24:26'),
-(2, 2, 2, 2, 12, 2024, 10000.00, 1, '2024-12-12 00:00:00', NULL, NULL, '2024-12-12 05:24:48', '2024-12-12 05:24:48');
-
 -- --------------------------------------------------------
 
 --
@@ -988,13 +957,6 @@ CREATE TABLE `sessions` (
   `payload` text NOT NULL,
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `sessions`
---
-
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('I5IHyDM2h6psFA4rH1bth71WbCV5DjwysLNWentO', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicGMxYTE3ZnR1elk0eFdIMnBhRXByT2JDUGdpOVZZSnlJbDdsRzNTVCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1698552730);
 
 -- --------------------------------------------------------
 
@@ -1052,14 +1014,6 @@ CREATE TABLE `teams` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `teams`
---
-
-INSERT INTO `teams` (`id`, `user_id`, `name`, `personal_team`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Avijit\'s Team', 1, '2023-09-21 02:34:04', '2023-09-21 02:34:04'),
-(2, 2, 'Admin\'s Team', 1, '2023-09-23 00:08:01', '2023-09-23 00:08:01');
-
 -- --------------------------------------------------------
 
 --
@@ -1082,25 +1036,6 @@ CREATE TABLE `transactions` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `transactions`
---
-
-INSERT INTO `transactions` (`id`, `user_id`, `payment_method_id`, `transactionable_id`, `transactionable_type`, `type`, `sent_amount`, `receive_amount`, `reference`, `note`, `transaction_date`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 1, 'App\\Models\\PaymentMethod', 0, NULL, 1250, NULL, NULL, '2024-12-12 10:42:23', '2024-12-12 04:42:23', '2024-12-12 04:42:23'),
-(2, 2, 2, 2, 'App\\Models\\PaymentMethod', 0, NULL, 2000, NULL, NULL, '2024-12-12 10:56:51', '2024-12-12 04:56:51', '2024-12-12 04:56:51'),
-(3, 2, 1, 1, 'App\\Models\\RentCollectionHistory', 0, NULL, 4000, NULL, 'half paid', '2024-12-12 11:10:33', '2024-12-12 05:10:33', '2024-12-12 05:10:33'),
-(4, 2, 2, 2, 'App\\Models\\RentCollectionHistory', 0, NULL, 2000, NULL, 'Beton pay e nai', '2024-12-12 11:13:40', '2024-12-12 05:13:40', '2024-12-12 05:13:40'),
-(5, 2, 2, 1, 'App\\Models\\IncomeExpence', 0, NULL, 4000, 'Arnob gosh', 'thik somoy moto pawa jacce na tk', '2024-12-12 11:18:38', '2024-12-12 05:18:38', '2024-12-12 05:18:38'),
-(6, 2, 1, 2, 'App\\Models\\IncomeExpence', 1, 500, NULL, 'Arnob gosh', 'Bathroom er gizer', '2024-12-12 11:19:26', '2024-12-12 05:19:26', '2024-12-12 05:19:26'),
-(7, 2, 1, 1, 'App\\Models\\SalaryRecord', 1, 2000, NULL, NULL, NULL, '2024-12-12 11:24:26', '2024-12-12 05:24:26', '2024-12-12 05:24:26'),
-(8, 2, 2, 2, 'App\\Models\\SalaryRecord', 1, 10000, NULL, NULL, NULL, '2024-12-12 11:24:48', '2024-12-12 05:24:48', '2024-12-12 05:24:48'),
-(9, 2, 1, 3, 'App\\Models\\BankTransaction', 1, 59, NULL, '674', 'Numquam amet explic', '2024-12-19 11:24:05', '2024-12-19 05:24:05', '2024-12-19 05:24:05'),
-(11, 2, 1, 3, 'App\\Models\\RentCollectionHistory', 0, NULL, 10000, NULL, 'onk deri hoiya gelo', '2024-12-21 09:56:47', '2024-12-21 03:56:47', '2024-12-21 03:56:47'),
-(12, 2, 1, 4, 'App\\Models\\RentCollectionHistory', 0, NULL, 500, NULL, 'Labore modi et lorem', '2024-12-24 11:51:16', '2024-12-24 05:51:16', '2024-12-24 05:51:16'),
-(13, 2, 1, 5, 'App\\Models\\RentCollectionHistory', 0, NULL, 2000, NULL, 'onk note e ache bole gelam na', '2024-12-24 13:06:23', '2024-12-24 07:06:24', '2024-12-24 07:06:24'),
-(14, 2, 1, 6, 'App\\Models\\RentCollectionHistory', 0, NULL, 50, NULL, 'Magna consequat Vel', '2025-01-01 11:35:45', '2025-01-01 05:35:45', '2025-01-01 05:35:45');
-
 -- --------------------------------------------------------
 
 --
@@ -1115,7 +1050,7 @@ CREATE TABLE `units` (
   `name` varchar(255) NOT NULL,
   `info` varchar(255) DEFAULT NULL,
   `status` tinyint(4) NOT NULL,
-  `rent_status` tinyint(9) NOT NULL DEFAULT 0 COMMENT '0:Avilable 1:Rented',
+  `rent_status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0:Avilable 1:Rented',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1125,12 +1060,19 @@ CREATE TABLE `units` (
 --
 
 INSERT INTO `units` (`id`, `user_id`, `house_id`, `floor_id`, `name`, `info`, `status`, `rent_status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 1, 'Garage', 'Left side garage', 1, 1, '2024-12-12 04:29:57', '2024-12-12 04:29:57'),
-(2, 2, 1, 2, '1A', 'THis is An-nur room', 1, 1, '2024-12-12 04:32:48', '2024-12-12 04:32:48'),
-(3, 2, 1, 2, '1B', 'THis is Nafiz room', 1, 1, '2024-12-12 04:33:14', '2024-12-23 07:19:10'),
-(4, 2, 1, 3, 'Belkuni', NULL, 1, 1, '2024-12-12 04:33:35', '2024-12-25 05:11:14'),
-(5, 2, 2, 4, 'Full Unit', NULL, 1, 1, '2024-12-12 04:33:54', '2024-12-21 11:46:41'),
-(6, 2, 1, 3, 'Alden Marsh', 'Quia autem id duis e', 1, 0, '2025-01-01 04:41:49', '2025-01-01 04:42:28');
+(1, 2, 1, 1, 'ROOM NO :01', 'রুমের বৈশিষ্টঃ- রুমটি এটাস্ট বাথরুম লো-কমোড+বেসিং, রুমের পশ্চিম পাশে জানালা রয়েছে।', 1, 1, '2025-01-13 01:14:15', '2025-01-13 01:55:43'),
+(2, 2, 1, 1, 'ROOM NO: 02', 'রুমের বৈশিষ্টঃ- সিঙ্গেল রুম, কমোন-বাথরুম, রুমের জানালা রুমের পশ্চিম দিকে।', 1, 1, '2025-01-13 01:54:36', '2025-01-13 02:29:23'),
+(3, 2, 1, 1, 'ROOM NO: 03', 'রুমের বৈশিষ্টঃ- রুমটি এটাস্ট বাথরুম লো-কমোড+বেসিং, রুমের পূর্ব পাশে জানালা রয়েছে।', 1, 1, '2025-01-13 01:55:19', '2025-01-13 02:40:13'),
+(4, 2, 1, 1, 'ROOM NO: 04', 'রুমের বৈশিষ্টঃ- সিঙ্গেল বড় রুম, কমোন-বাথরুম, রুমের পূর্ব ও দক্ষিণ দিকে ২টি জানালা রয়েছে ।', 1, 1, '2025-01-13 01:56:47', '2025-01-13 03:03:08'),
+(5, 2, 1, 1, 'ROOM NO: 05', 'রুমের বৈশিষ্টঃ- সিঙ্গেল রুম, কমোন-বাথরুম, রুমের দক্ষিণ দিকে ১টি জানালা রয়েছে।', 1, 0, '2025-01-13 01:57:29', '2025-01-13 01:57:29'),
+(6, 2, 1, 1, 'ROOM NO: 06', 'রুমের বৈশিষ্টঃ- রুমটি এটাস্ট বাথরুম লো-কমোড+বেসিং, রুমের পূর্ব পাশে ১টি জানালা রয়েছে।', 1, 0, '2025-01-13 02:07:12', '2025-01-13 02:07:12'),
+(7, 2, 1, 1, 'ROOM NO: 07', 'রুমের বৈশিষ্টঃ- রুমটি এটাস্ট বাথরুম লো-কমোড+বেসিং, রুমের দক্ষিণ পাশে ১টি জানালা রয়েছে।', 1, 0, '2025-01-13 02:08:17', '2025-01-13 02:08:17'),
+(8, 2, 1, 1, 'ROOM NO: 08', 'রুমের বৈশিষ্টঃ- সিঙ্গেল রুম, কমোন-বাথরুম, রুমের দক্ষিণ দিকে  ১টি বড় জানালা রয়েছে।', 1, 0, '2025-01-13 02:08:58', '2025-01-13 02:08:58'),
+(9, 2, 1, 1, 'ROOM NO: 09', 'রুমের বৈশিষ্টঃ- সিঙ্গেল বড় রুম, কমোন-বাথরুম, রুমের পশ্চিম দিকে ১টি জানালা রয়েছে ।', 1, 0, '2025-01-13 02:09:48', '2025-01-13 02:09:48'),
+(10, 2, 1, 1, 'ROOM NO: 40', 'রুমের বৈশিষ্টঃ- সিঙ্গেল বড় রুম, কমোন-বাথরুম, রুমের পশ্চিম দিকে ১টি জানালা রয়েছে ।', 1, 0, '2025-01-13 02:11:21', '2025-01-13 02:11:21'),
+(11, 2, 1, 1, 'ROOM NO: 41', 'রুমের বৈশিষ্টঃ- সিঙ্গেল রুম, কমোন-বাথরুম, রুমের পূর্ব দিকে ১টি জানালা রয়েছে।', 1, 0, '2025-01-13 02:12:05', '2025-01-13 02:12:05'),
+(12, 2, 1, 1, 'ROOM NO: 42', 'রুমের বৈশিষ্টঃ- সিঙ্গেল রুম, কমোন-বাথরুম, রুমের পূর্ব  দিকে ১টি জানালা রয়েছে ।', 1, 0, '2025-01-13 02:12:30', '2025-01-13 02:12:30'),
+(13, 2, 1, 1, 'ROOM NO: 04', 'রুমের বৈশিষ্টঃ- সিঙ্গেল বড় রুম, কমোন-বাথরুম, রুমের পূর্ব ও দক্ষিণ দিকে ২টি জানালা রয়েছে ।', 1, 0, '2025-01-13 03:05:19', '2025-01-17 13:49:37');
 
 -- --------------------------------------------------------
 
@@ -1160,7 +1102,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `type`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `profile_photo_path`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 'Admin', 'admin@gmail.com', NULL, '$2y$10$xAKfG4nGD0u5D8T2dRP5Iu6PHzw.t8sxjY9CBF3vYbGQuXO1L/Ioq', 'admin', NULL, NULL, NULL, 'Scinn3ybWpqoPSNok82iAlOF06L8ynxrOawaX6GD7tYzSCbmoeBf5mme0oxr', NULL, '2023-09-23 00:08:01', '2024-01-20 09:31:20', NULL);
+(2, 'Admin', 'admin@gmail.com', NULL, '$2y$10$xAKfG4nGD0u5D8T2dRP5Iu6PHzw.t8sxjY9CBF3vYbGQuXO1L/Ioq', 'admin', NULL, NULL, NULL, 'QsdpsDIcIw68JoL5cL491QCr58k8s4b7rAsKVY9YDEaXmsQJOzFN2iLYLTxc', NULL, '2023-09-23 00:08:01', '2024-01-20 09:31:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -1205,8 +1147,10 @@ CREATE TABLE `user_statements` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `rent_id` bigint(20) UNSIGNED NOT NULL,
+  `collection_id` bigint(20) UNSIGNED DEFAULT NULL,
   `monthly_rent_id` bigint(20) UNSIGNED NOT NULL,
-  `payment_method_id` bigint(20) UNSIGNED NOT NULL,
+  `payment_method_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `payable_amount` decimal(40,2) DEFAULT NULL,
   `amount_paid` decimal(10,2) NOT NULL,
   `balance` decimal(10,2) NOT NULL,
   `payment_date` date NOT NULL,
@@ -1218,11 +1162,11 @@ CREATE TABLE `user_statements` (
 -- Dumping data for table `user_statements`
 --
 
-INSERT INTO `user_statements` (`id`, `user_id`, `rent_id`, `monthly_rent_id`, `payment_method_id`, `amount_paid`, `balance`, `payment_date`, `created_at`, `updated_at`) VALUES
-(1, 2, 3, 4, 1, 10000.00, 3000.00, '2024-12-21', '2024-12-21 03:56:47', '2024-12-21 03:56:47'),
-(2, 2, 4, 5, 1, 500.00, 12000.00, '2024-12-24', '2024-12-24 05:51:16', '2024-12-24 05:51:16'),
-(3, 2, 4, 5, 1, 2000.00, 10000.00, '2024-12-24', '2024-12-24 07:06:24', '2024-12-24 07:06:24'),
-(4, 2, 3, 4, 1, 50.00, 2950.00, '2009-06-03', '2025-01-01 05:35:45', '2025-01-01 05:35:45');
+INSERT INTO `user_statements` (`id`, `user_id`, `rent_id`, `collection_id`, `monthly_rent_id`, `payment_method_id`, `payable_amount`, `amount_paid`, `balance`, `payment_date`, `created_at`, `updated_at`) VALUES
+(6, 2, 1, NULL, 1, 1, NULL, 4800.00, 0.00, '2025-01-05', '2025-01-13 03:14:20', '2025-01-13 03:14:20'),
+(13, 2, 2, NULL, 2, 1, NULL, 2500.00, 4000.00, '2025-01-13', '2025-01-13 06:26:43', '2025-01-13 06:26:43'),
+(27, 2, 3, NULL, 11, 1, NULL, 300.00, 10600.00, '2025-01-21', '2025-01-13 07:42:54', '2025-01-13 07:42:54'),
+(28, 2, 4, NULL, 12, 1, NULL, 2250.00, 0.00, '2025-01-20', '2025-01-14 00:23:09', '2025-01-14 00:23:09');
 
 --
 -- Indexes for dumped tables
@@ -1323,8 +1267,8 @@ ALTER TABLE `model_has_roles`
 --
 ALTER TABLE `monthly_rents`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `monthly_rents_user_id_foreign` (`user_id`),
-  ADD KEY `monthly_rents_rent_id_foreign` (`rent_id`);
+  ADD KEY `monthly_rents_rent_id_foreign` (`rent_id`),
+  ADD KEY `monthly_rents_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `password_resets`
@@ -1387,18 +1331,28 @@ ALTER TABLE `renters`
 --
 ALTER TABLE `rents`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `rents_user_id_foreign` (`user_id`),
-  ADD KEY `rents_renter_id_foreign` (`renter_id`),
-  ADD KEY `rents_house_id_foreign` (`house_id`),
   ADD KEY `rents_floor_id_foreign` (`floor_id`),
-  ADD KEY `rents_unit_id_foreign` (`unit_id`);
+  ADD KEY `rents_house_id_foreign` (`house_id`),
+  ADD KEY `rents_renter_id_foreign` (`renter_id`),
+  ADD KEY `rents_unit_id_foreign` (`unit_id`),
+  ADD KEY `rents_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `rent_adjustments`
+--
+ALTER TABLE `rent_adjustments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `rent_adjustments_rent_id_foreign` (`rent_id`),
+  ADD KEY `rent_adjustments_renter_id_foreign` (`renter_id`),
+  ADD KEY `rent_adjustments_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `rent_collection_histories`
 --
 ALTER TABLE `rent_collection_histories`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `rent_id` (`rent_id`);
+  ADD KEY `rent_id` (`rent_id`),
+  ADD KEY `monthly_rents_foreign` (`monthly_rent_id`);
 
 --
 -- Indexes for table `roles`
@@ -1487,10 +1441,10 @@ ALTER TABLE `user_has_roles`
 --
 ALTER TABLE `user_statements`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_statements_user_id_foreign` (`user_id`),
-  ADD KEY `user_statements_rent_id_foreign` (`rent_id`),
   ADD KEY `user_statements_monthly_rent_id_foreign` (`monthly_rent_id`),
-  ADD KEY `user_statements_payment_method_id_foreign` (`payment_method_id`);
+  ADD KEY `user_statements_payment_method_id_foreign` (`payment_method_id`),
+  ADD KEY `user_statements_rent_id_foreign` (`rent_id`),
+  ADD KEY `user_statements_user_id_foreign` (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1500,7 +1454,7 @@ ALTER TABLE `user_statements`
 -- AUTO_INCREMENT for table `bank_transactions`
 --
 ALTER TABLE `bank_transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -1512,13 +1466,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `designations`
 --
 ALTER TABLE `designations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1530,13 +1484,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `floors`
 --
 ALTER TABLE `floors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `houses`
 --
 ALTER TABLE `houses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `income_expences`
@@ -1554,19 +1508,19 @@ ALTER TABLE `income_expence_categories`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `monthly_rents`
 --
 ALTER TABLE `monthly_rents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -1596,7 +1550,7 @@ ALTER TABLE `phonebooks`
 -- AUTO_INCREMENT for table `remainders`
 --
 ALTER TABLE `remainders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `renters`
@@ -1608,13 +1562,19 @@ ALTER TABLE `renters`
 -- AUTO_INCREMENT for table `rents`
 --
 ALTER TABLE `rents`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `rent_adjustments`
+--
+ALTER TABLE `rent_adjustments`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `rent_collection_histories`
 --
 ALTER TABLE `rent_collection_histories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1626,7 +1586,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `salary_records`
 --
 ALTER TABLE `salary_records`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -1638,19 +1598,19 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `units`
 --
 ALTER TABLE `units`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1662,7 +1622,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_statements`
 --
 ALTER TABLE `user_statements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Constraints for dumped tables
@@ -1672,68 +1632,68 @@ ALTER TABLE `user_statements`
 -- Constraints for table `bank_transactions`
 --
 ALTER TABLE `bank_transactions`
-  ADD CONSTRAINT `bank_transactions_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `bank_transactions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `bank_transactions_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `bank_transactions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `categories`
 --
 ALTER TABLE `categories`
-  ADD CONSTRAINT `categories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `categories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `designations`
 --
 ALTER TABLE `designations`
-  ADD CONSTRAINT `designations_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `designations_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `employees`
 --
 ALTER TABLE `employees`
-  ADD CONSTRAINT `employees_designation_id_foreign` FOREIGN KEY (`designation_id`) REFERENCES `designations` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `employees_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `employees_designation_id_foreign` FOREIGN KEY (`designation_id`) REFERENCES `designations` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `employees_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `floors`
 --
 ALTER TABLE `floors`
-  ADD CONSTRAINT `floors_house_id_foreign` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `floors_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `floors_house_id_foreign` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `floors_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `houses`
 --
 ALTER TABLE `houses`
-  ADD CONSTRAINT `houses_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `houses_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `income_expences`
 --
 ALTER TABLE `income_expences`
-  ADD CONSTRAINT `income_expences_house_id_foreign` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `income_expences_income_expence_category_id_foreign` FOREIGN KEY (`income_expence_category_id`) REFERENCES `income_expence_categories` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `income_expences_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `income_expences_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `income_expences_house_id_foreign` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `income_expences_income_expence_category_id_foreign` FOREIGN KEY (`income_expence_category_id`) REFERENCES `income_expence_categories` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `income_expences_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `income_expences_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `income_expence_categories`
 --
 ALTER TABLE `income_expence_categories`
-  ADD CONSTRAINT `income_expence_categories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `income_expence_categories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `monthly_rents`
 --
 ALTER TABLE `monthly_rents`
-  ADD CONSTRAINT `monthly_rents_rent_id_foreign` FOREIGN KEY (`rent_id`) REFERENCES `rents` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `monthly_rents_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `monthly_rents_rent_id_foreign` FOREIGN KEY (`rent_id`) REFERENCES `rents` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `monthly_rents_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
-  ADD CONSTRAINT `payment_methods_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `payment_methods_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `phonebooks`
@@ -1746,38 +1706,47 @@ ALTER TABLE `phonebooks`
 -- Constraints for table `remainders`
 --
 ALTER TABLE `remainders`
-  ADD CONSTRAINT `remainders_renter_id_foreign` FOREIGN KEY (`renter_id`) REFERENCES `renters` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `remainders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `remainders_renter_id_foreign` FOREIGN KEY (`renter_id`) REFERENCES `renters` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `remainders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `renters`
 --
 ALTER TABLE `renters`
-  ADD CONSTRAINT `renters_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `renters_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `rents`
 --
 ALTER TABLE `rents`
-  ADD CONSTRAINT `rents_floor_id_foreign` FOREIGN KEY (`floor_id`) REFERENCES `floors` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `rents_house_id_foreign` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `rents_renter_id_foreign` FOREIGN KEY (`renter_id`) REFERENCES `renters` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `rents_unit_id_foreign` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `rents_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `rents_floor_id_foreign` FOREIGN KEY (`floor_id`) REFERENCES `floors` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `rents_house_id_foreign` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `rents_renter_id_foreign` FOREIGN KEY (`renter_id`) REFERENCES `renters` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `rents_unit_id_foreign` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `rents_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rent_adjustments`
+--
+ALTER TABLE `rent_adjustments`
+  ADD CONSTRAINT `rent_adjustments_rent_id_foreign` FOREIGN KEY (`rent_id`) REFERENCES `rents` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `rent_adjustments_renter_id_foreign` FOREIGN KEY (`renter_id`) REFERENCES `renters` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `rent_adjustments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `rent_collection_histories`
 --
 ALTER TABLE `rent_collection_histories`
-  ADD CONSTRAINT `rent_id` FOREIGN KEY (`rent_id`) REFERENCES `rents` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `monthly_rents_foreign` FOREIGN KEY (`monthly_rent_id`) REFERENCES `monthly_rents` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `rent_id` FOREIGN KEY (`rent_id`) REFERENCES `rents` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `salary_records`
 --
 ALTER TABLE `salary_records`
-  ADD CONSTRAINT `salary_records_employee_id_foreign` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `salary_records_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `salary_records_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `salary_records_employee_id_foreign` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `salary_records_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `salary_records_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `settings`
@@ -1789,25 +1758,25 @@ ALTER TABLE `settings`
 -- Constraints for table `transactions`
 --
 ALTER TABLE `transactions`
-  ADD CONSTRAINT `transactions_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `transactions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `transactions_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `transactions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `units`
 --
 ALTER TABLE `units`
-  ADD CONSTRAINT `units_floor_id_foreign` FOREIGN KEY (`floor_id`) REFERENCES `floors` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `units_house_id_foreign` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `units_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `units_floor_id_foreign` FOREIGN KEY (`floor_id`) REFERENCES `floors` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `units_house_id_foreign` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `units_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_statements`
 --
 ALTER TABLE `user_statements`
-  ADD CONSTRAINT `user_statements_monthly_rent_id_foreign` FOREIGN KEY (`monthly_rent_id`) REFERENCES `monthly_rents` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `user_statements_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `user_statements_rent_id_foreign` FOREIGN KEY (`rent_id`) REFERENCES `rents` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `user_statements_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `user_statements_monthly_rent_id_foreign` FOREIGN KEY (`monthly_rent_id`) REFERENCES `monthly_rents` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_statements_payment_method_id_foreign` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_statements_rent_id_foreign` FOREIGN KEY (`rent_id`) REFERENCES `rents` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_statements_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

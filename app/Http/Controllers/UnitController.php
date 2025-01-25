@@ -6,6 +6,7 @@ use App\Models\Unit;
 use App\Models\Floor;
 use App\Models\House;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class UnitController extends Controller
@@ -68,12 +69,13 @@ class UnitController extends Controller
     }
     public function getFloors($houseId)
     {
-        $floors = Floor::where('house_id', $houseId)->get();
+        $floors = Floor::where('house_id', $houseId)->where('status','1')->get();
         return response()->json($floors);
     }
     public function getunits($houseId)
     {
-        $floors = Unit::where('floor_id', $houseId)->where('rent_status', '0')->get();
+        $floors = Unit::where('floor_id', $houseId)->where('rent_status', '0')
+        ->where('status','1')->get();
         return response()->json($floors);
     }
     /**
@@ -124,7 +126,12 @@ class UnitController extends Controller
     public function destroy($id)
     {
         $unit = Unit::find($id);
+        $isUsedInRent = DB::table('rents')->where('unit_id', $unit->id)->exists();
+        if ($isUsedInRent) {
+            return back()
+                ->with('failed', 'Cannot delete this it is linked to other records.');
+        }
         $unit->delete();
-        return redirect()->back()->with('success', 'Operation completed successfully!');
+        return back()->with('success', 'Deleted successfully!');
     }
 }

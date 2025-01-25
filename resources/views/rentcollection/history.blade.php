@@ -31,9 +31,9 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ date('d-M-Y', strtotime($value->created_at)) }}</td>
                                     <td>{{ $value->invoice }}</td>
-                                    <td>{{ $value->monthly_rent->rent->renter->name }}</td>
-                                    <td>{{ $value->monthly_rent->rent->renter->phone }}</td>
-                                    <td>{{ $value->monthly_rent->rent->house->house_name }}</td>
+                                    <td>{{ $value->rent->renter->name }}</td>
+                                    <td>{{ $value->rent->renter->phone }}</td>
+                                    <td>{{ $value->rent->house->house_name }}</td>
                                     <td>{{ $value->amount_paid }}</td>
                                     <td>{{ $value->notes }}</td>
                                     <td>

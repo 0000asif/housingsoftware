@@ -52,7 +52,6 @@ class FloorController extends Controller
 
         Floor::create($data);
         return redirect()->back()->with('success', 'Operation completed successfully!');
-
     }
 
     /**
@@ -115,11 +114,12 @@ class FloorController extends Controller
     {
         $floor = Floor::find($id);
         $isUsedInFloor = DB::table('units')->where('floor_id', $floor->id)->exists();
+        $isUsedInRent = DB::table('rents')->where('floor_id', $floor->id)->exists();
 
 
-        if ($isUsedInFloor) {
+        if ($isUsedInFloor || $isUsedInRent) {
             return redirect()->back()
-                ->with('error', 'Cannot delete this it is linked to other records.');
+                ->with('failed', 'Cannot delete this it is linked to other records.');
         }
 
         $floor->delete();

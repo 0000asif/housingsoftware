@@ -7,6 +7,7 @@ use App\Models\Designation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\SalaryRecord;
 use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
@@ -148,13 +149,18 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
+
         $employee = Employee::find($id);
+        $employeeExists = SalaryRecord::where('employee_id', $employee->id)->exists();
+        if ($employeeExists) {
+            return back()->with('failed', 'Employee Exists Salary Record');
+        }
         $employee->delete();
 
         $image_path = public_path("admin/employee/") . $employee->image;
         if (file_exists($image_path)) {
             @unlink($image_path);
         }
-        return redirect()->route('employee.index')->with('failed', 'Employee Deleted Successfully');
+        return redirect()->route('employee.index')->with('success', 'Employee Deleted Successfully');
     }
 }

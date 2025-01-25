@@ -16,18 +16,22 @@
                                 <p><strong>House Name:</strong> {{ $rent->rent->house->house_name ?? 'N/A' }}</p>
                                 <p><strong>Floor:</strong> {{ $rent->rent->floor->name ?? 'N/A' }}</p>
                                 <p><strong>Unit:</strong> {{ $rent->rent->unit->name ?? 'N/A' }}</p>
-                                <p><strong>Advance Amount:</strong> {{ number_format($rent->advance_amount, 2) }}</p>
+                                {{-- <p><strong>Advance Amount:</strong> {{ number_format($rent->advance_amount, 2) }}</p> --}}
                                 <p><strong>Rent Amount:</strong> {{ number_format($rent->total_amount, 2) }}</p>
                                 <p><strong>Extra Charge:</strong> {{ number_format($rent->extra_charge, 2) }}</p>
                             </div>
                             <div class="col-md-6">
                                 <h5>Agreement Info</h5>
-                                <p><strong>Agreement Date:</strong> {{ $rent->agreement_date }}</p>
-                                <p><strong>Rent Increment (Months):</strong> {{ $rent->increment_months ?? 'N/A' }}</p>
-                                <p><strong>Next Increment Date:</strong> {{ $rent->next_increment_date ?? 'N/A' }}</p>
-                                <p><strong>Rent Increment Flat:</strong> {{ $rent->increment_flat ?? 'N/A' }}</p>
-                                <p><strong>VAT:</strong> {{ number_format($rent->vat, 2) }}</p>
-                                <p><strong>Remarks:</strong> {{ $rent->remarks ?? 'N/A' }}</p>
+                                <p><strong>Agreement Date:</strong> {{ $rentAdjust->adjustment_date ?? '' }}</p>
+                                <p><strong>Rent Increment (Months):</strong>
+                                    {{ $rentAdjust && $rentAdjust->month
+                                        ? \Carbon\Carbon::create()->month($rentAdjust->month)->format('F')
+                                        : 'N/A' }}-{{ $rentAdjust->year ?? 'N/A' }}
+                                </p>
+
+                                <p><strong>Next Increment Date:</strong> {{ $rentAdjust->next_increment_date ?? 'N/A' }}</p>
+                                <p><strong>Rent Increment Flat:</strong> {{ $rentAdjust->monthly_rent ?? 'N/A' }}</p>
+                                <p><strong>Remarks:</strong> {{ $rentAdjust->remarks ?? 'N/A' }}</p>
                             </div>
 
                         </div>
@@ -47,7 +51,7 @@
                                     <th>Invoice</th>
                                     <th>Month</th>
                                     <th>Year</th>
-                                    <th>Rent Amount</th>
+                                    <th>Payable</th>
                                     <th>Payment</th>
                                     <th>Balance</th>
                                 </tr>
@@ -55,16 +59,23 @@
                             <tbody>
                                 @php $totalBalance = 0; @endphp
                                 @foreach ($ledger as $entry)
-                                    @php
-                                        $totalBalance += $entry->balance;
-                                    @endphp
+                                    @php $totalBalance += $entry->balance; @endphp
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $entry->payment_date }}</td>
                                         <td>{{ $entry->id }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($entry->payment_date)->format('F') }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($entry->payment_date)->year }}</td>
-                                        <td>{{ number_format($rent->total_amount, 2) }}</td>
+                                        <td>
+                                            {{ \Carbon\Carbon::create()->month($entry->monthlyRent->month)->format('F') }}
+                                        </td>
+
+                                        <td>{{ $entry->monthlyRent->year }}</td>
+                                        <td>
+                                            @if ($entry->payable_amount == null)
+                                                {{ number_format(0, 2) }}
+                                            @else
+                                                {{ number_format($entry->payable_amount, 2) }}
+                                            @endif
+                                        </td>
                                         <td>{{ number_format($entry->amount_paid, 2) }}</td>
                                         <td>{{ number_format($entry->balance, 2) }}</td>
                                     </tr>

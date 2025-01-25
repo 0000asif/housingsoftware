@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\IncomeExpence;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\IncomeExpenceCategory;
 
@@ -102,6 +104,10 @@ class IncomeExpenceCategoryController extends Controller
      */
     public function destroy($id)
     {
+        $exitsing = IncomeExpence::where('income_expence_category_id', $id)->exists();
+        if ($exitsing) {
+            return back()->with('failed', 'This category use in income expense time');
+        }
         $category = IncomeExpenceCategory::find($id);
         $category->delete();
 
