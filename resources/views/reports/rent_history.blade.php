@@ -61,7 +61,8 @@
                                         <select name="project_id" id="project_id" class="form-control select2_demo">
                                             <option value="">Select an option</option>
                                             @foreach ($houses as $staff)
-                                                <option value="{{ $staff->id }}">{{ $staff->house_name }} {{ $staff->address }}</option>
+                                                <option value="{{ $staff->id }}">{{ $staff->house_name }}
+                                                    {{ $staff->address }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -78,9 +79,12 @@
                                             <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>Full
                                                 Paid
                                             </option>
-                                            <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Due
+                                            <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>
+                                                Partial
+                                                Paid
                                             </option>
-                                            <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>Pending
+                                            <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>
+                                                Unpaid
                                             </option>
                                         </select>
                                     </div>
@@ -98,7 +102,7 @@
                         {!! Form::close() !!}
                 </div>
             </div>
-            <center><img src="{{ asset('image/loading.gif') }}" style="display: none;" id="loader" alt="">
+            <center><img src="{{ asset('image/loader.gif') }}" style="display: none;" id="loader" alt="">
             </center>
             <span id="get_content"></span>
 
@@ -147,6 +151,23 @@
                         } else {
                             // Populate the content with the server response
                             $('#get_content').html(response);
+
+
+
+                            $('#printReport').click(function() {
+                                var printContents = document.getElementById(
+                                        'get_content')
+                                    .innerHTML;
+                                var originalContents = document.body.innerHTML;
+
+                                // Replace the body content with the report content for printing
+                                document.body.innerHTML = printContents;
+                                window.print();
+
+                                // Restore the original body content after printing
+                                document.body.innerHTML = originalContents;
+                                location.reload();
+                            });
                         }
                     },
                     error: function(xhr, status, error) {

@@ -116,11 +116,11 @@ class MonthlyRentController extends Controller
     {
         // Validate the request inputs
         $request->validate([
-            'agreement_id' => 'required|exists:rents,id',
-            'year' => 'required|digits:4|integer|min:2000|max:' . date('Y'),
-            'month' => 'required|integer|min:1|max:12',
+            'agreement_id'  => 'required|exists:rents,id',
+            'year'          => 'required|digits:4|integer|min:2000|max:' . date('Y'),
+            'month'         => 'required|integer|min:1|max:12',
             'generate_date' => 'required|date',
-            'remarks' => 'nullable|string|max:255',
+            'remarks'       => 'nullable|string|max:255',
         ]);
 
         DB::beginTransaction();
@@ -207,19 +207,14 @@ class MonthlyRentController extends Controller
                 ]);
             }
 
-            $previousBalance = UserStatement::where('rent_id', $rent->id)
-                ->latest('created_at')
-                ->value('balance') ?? 0;
-
-            $newBalance = $previousBalance + $monthly_rent->total_amount;
             UserStatement::create([
-                'user_id' => Auth::user()->id,
-                'rent_id' => $rent->id, // Assuming renter's ID is stored in `user_id`
-                'monthly_rent_id' => $monthly_rent->id,
-                'payable_amount' => $monthly_rent->total_amount,
-                'amount_paid' => 0,
-                'balance' => $newBalance,
-                'payment_date' => $startDates,
+                'user_id'           => Auth::user()->id,
+                'rent_id'           => $rent->id, // Assuming renter's ID is stored in `user_id`
+                'monthly_rent_id'   => $monthly_rent->id,
+                'payable_amount'    => $monthly_rent->total_amount,
+                'amount_paid'       => 0,
+                'balance'           => 0,
+                'payment_date'      => $startDates,
             ]);
 
             DB::commit();
@@ -340,11 +335,11 @@ class MonthlyRentController extends Controller
                 $newBalance = $previousBalance + $monthly_rent->total_amount;
                 UserStatement::create([
                     'user_id' => Auth::user()->id, // Assuming user's ID is stored in `user_id`
-                    'rent_id' => $rent->id, // Assuming renter's ID is stored in `user_id`
-                    'monthly_rent_id' => $monthly_rent->id,
-                    'amount_paid' => 0,
-                    'balance' => $newBalance,
-                    'payment_date' => $startDates,
+                    'rent_id'           => $rent->id, // Assuming renter's ID is stored in `user_id`
+                    'monthly_rent_id'   => $monthly_rent->id,
+                    'amount_paid'       => 0,
+                    'balance'           => $newBalance,
+                    'payment_date'      => $startDates,
                 ]);
             }
 

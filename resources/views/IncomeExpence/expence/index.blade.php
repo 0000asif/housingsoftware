@@ -19,8 +19,7 @@
                                 <th>Created By</th>
                                 <th>Category</th>
                                 <th>Payment Method</th>
-                                <th>Project</th>
-                                <th>Customer</th>
+                                <th>House</th>
                                 <th>Date</th>
                                 <th>amount</th>
                                 <th>note</th>
@@ -36,8 +35,7 @@
                                     <td>{{ $value->user->name }}</td>
                                     <td>{{ $value->category->name }}</td>
                                     <td>{{ $value->paymentmethod->name }}</td>
-                                    <td>{{ $value->project->project_name ?? 'N/A' }}</td>
-                                    <td>{{ $value->lead->name ?? 'N/A' }}</td>
+                                    <td>{{ $value->project->house_name ?? 'N/A' }}</td>
                                     <td>{{ date('d-m-Y', strtotime($value->date)) }}</td>
                                     <td>{{ $value->expence_amount }} </td>
                                     <td>{{ $value->note ?? 'N/A' }}</td>

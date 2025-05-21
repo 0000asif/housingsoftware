@@ -1,9 +1,25 @@
+<style>
+    @media print {
+
+        #loader,
+        #printReport {
+            display: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+    }
+</style>
+
+
 <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-md-10">
                 <h5 class="box-title" class="">Staff Salary Report <?php echo date('d-m-Y', strtotime($from_date)); ?> To <?php echo date('d-m-Y', strtotime($to_date)); ?>
                 </h5>
+                <button id="printReport" class="btn btn-sm btn-primary">Print Report</button>
             </div>
 
         </div>

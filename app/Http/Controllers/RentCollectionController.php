@@ -24,8 +24,8 @@ class RentCollectionController extends Controller
     public function create()
     {
         // $rents = MonthlyRent::with('collectionHistory')->get();
-        $rents = Rent::where('status', '1')->with('renter')->get();
-        $methods = PaymentMethod::get();
+        $rents      = Rent::with('renter')->get();
+        $methods    = PaymentMethod::get();
         return view('rentcollection.create', compact('rents', 'methods'));
     }
 
@@ -61,27 +61,28 @@ class RentCollectionController extends Controller
     public function collectRent(Request $request)
     {
         $request->validate([
-            'amount_paid' => 'required|numeric|min:1',
-            'payment_date' => 'required|date',
+            'amount_paid'    => 'required|numeric|min:1',
+            'payment_date'   => 'required|date',
             'payment_method' => 'required|string',
-            'notes' => 'nullable|string',
+            'notes'          => 'nullable|string',
         ]);
+
+
 
         DB::beginTransaction();
         try {
+
             $rentId = $request->agreement_id;
-
-            $rent = MonthlyRent::where('rent_id', $rentId)->where('month', $request->month)->where('year', $request->year)->first();
-
-            if ($rent == null) {
-                return back()->with('failed', 'এই মাসের ভাড়া জেনারেট করা হয় নাই।');
-            }
+            $rent       = MonthlyRent::where('rent_id', $rentId)->where('month', $request->month)->where('year', $request->year)->first();
+            // if ($rent == null) {
+            //     return back()->with('failed', 'এই মাসের ভাড়া জেনারেট করা হয় নাই।');
+            // }
 
             $date = date('Y-m-d', strtotime($request->payment_date));
             $invoice = time();
 
             $collection_amount = $rent->collection_amount ?? 0;
-            $newAdvance = $collection_amount + $request->amount_paid;
+            $newAdvance        = $collection_amount + $request->amount_paid;
 
             // Update Rent Status
             $status = $newAdvance >= $rent->total_amount ? 2 : 1; // 2 for fully paid, 1 for partially paid
@@ -116,25 +117,21 @@ class RentCollectionController extends Controller
             // Update Rent Collection Amount and Status
             $rent->update([
                 'collection_amount' => $newAdvance,
-                'status' => $status,
+                'status'            => $status,
+                'date'              => $date,
             ]);
 
-            // Add to Renter Ledger
-            $previousBalance = UserStatement::where('rent_id', $rent->rent_id)
-                ->latest('payment_date')
-                ->orderBy('created_at', 'desc')
-                ->value('balance') ?? 0;
-
-            $newBalance = $previousBalance - $request->amount_paid;
             UserStatement::create([
-                'user_id' => Auth::user()->id, // Assuming user's ID is stored in `user_id`
-                'rent_id' => $rent->rent_id, // Assuming renter's ID is stored in `user_id`
-                'monthly_rent_id' => $rent->id,
-                'amount_paid' => $request->amount_paid,
+                'user_id'           => Auth::user()->id,
+                'rent_id'           => $rent->rent_id,
+                'monthly_rent_id'   => $rent->id,
+                'collection_id'     => $collection->id,
+                'amount_paid'       => $request->amount_paid,
                 'payment_method_id' => $request->method_id,
-                'balance' => $newBalance,
-                'payment_date' => $date,
+                'balance'           => 0,
+                'payment_date'      => $date,
             ]);
+
 
             DB::commit();
             return redirect()->back()->with('success', 'Rent collected successfully and ledger updated.');
@@ -168,20 +165,20 @@ class RentCollectionController extends Controller
         try {
             DB::beginTransaction();
 
-            $rent = MonthlyRent::where('id', $collection->monthly_rent_id)->first();
-            $previous_collection = $rent->collection_amount;
-            $collected          = $collection->amount_paid;
-            $new_collection     = $previous_collection - $collected;
+            $rent                   = MonthlyRent::where('id', $collection->monthly_rent_id)->first();
+            $previous_collection    = $rent->collection_amount;
+            $collected              = $collection->amount_paid;
+            $new_collection         = $previous_collection - $collected;
 
             $rent->update([
                 'collection_amount' => $new_collection,
+                'status'            => 1,
             ]);
 
-            $statement = UserStatement::where('rent_id', $collection->rent_id)->where('monthly_rent_id', $collection->monthly_rent_id)->first();
+            $statement = UserStatement::where('collection_id', $collection->id)->first();
             $statement->delete();
-            
-            $collection->delete();
 
+            $collection->delete();
             DB::commit();
             return redirect()->back()->with('success', 'Collection deleted successfully.');
         } catch (Exception $e) {

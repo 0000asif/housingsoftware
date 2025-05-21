@@ -41,18 +41,19 @@ class RenterController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'required|string|unique:renters,phone',
-            'gender' => 'required|string|in:male,female,other',
-            'birth_date' => 'nullable|date',
-            'regnumber' => 'nullable|string|max:255',
-            'occupation' => 'required|string|max:255',
-            'institute' => 'nullable|string|max:255',
-            'other_info' => 'nullable|string',
-            'address' => 'required|string',
-            'note' => 'nullable',
-            'pdf_file' => 'nullable',
+            'name'          => 'required|string|max:255',
+            'email'         => 'nullable|email|max:255',
+            'phone'         => 'required|string|unique:renters,phone',
+            'gender'        => 'required|string|in:male,female,other',
+            'birth_date'    => 'nullable|date',
+            'nid'           => 'required',
+            'regnumber'     => 'nullable|string|max:255',
+            'occupation'    => 'required|string|max:255',
+            'institute'     => 'nullable|string|max:255',
+            'other_info'    => 'nullable|string',
+            'address'       => 'required|string',
+            'note'          => 'nullable',
+            'pdf_file'      => 'nullable',
         ]);
 
         // if ($request->hasFile('photo')) {

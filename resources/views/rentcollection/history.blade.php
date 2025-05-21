@@ -19,6 +19,8 @@
                                 <th>Name</th>
                                 <th>Mobile</th>
                                 <th>House</th>
+                                <th>Floor</th>
+                                <th>Unit</th>
                                 <th>Collection Amount</th>
                                 <th>Remarks</th>
                                 <th>Actions</th>
@@ -34,6 +36,8 @@
                                     <td>{{ $value->rent->renter->name }}</td>
                                     <td>{{ $value->rent->renter->phone }}</td>
                                     <td>{{ $value->rent->house->house_name }}</td>
+                                    <td>{{ $value->rent->floor->name }} </td>
+                                    <td>{{ $value->rent->unit->name }} </td>
                                     <td>{{ $value->amount_paid }}</td>
                                     <td>{{ $value->notes }}</td>
                                     <td>

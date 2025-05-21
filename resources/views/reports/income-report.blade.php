@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <form class=" form-success mb-4" method="post">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label class="">From <span class="material-icons"
                                             style="color: red;font-size: 10px;">star_rate</span></label>
@@ -25,7 +25,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label class="">To <span class="material-icons"
                                             style="color: red;font-size: 10px;">star_rate</span></label>
@@ -36,20 +36,20 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="col-md-3">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="">Project <span class="material-icons"
+                                    <label class="">House <span class="material-icons"
                                             style="color: red;font-size: 10px;">name</span></label>
                                     <div class="md-form m-0">
-                                        <select name="staff" id="staff_id" class="form-control select2_demo">
-                                            <option value="">Select project</option>
-                                            @foreach ($staffs as $staff)
-                                                <option value="{{ $staff->id }}">{{ $staff->project_name }}</option>
+                                        <select name="house" id="house_id" class="form-control select2_demo">
+                                            <option value="">Select House</option>
+                                            @foreach ($all_house as $house)
+                                                <option value="{{ $house->id }}">{{ $house->house_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -93,6 +93,7 @@
             var to_date = $('#to_date').val();
             var from_date = $('#from_date').val();
             var category_id = $('#category_id').val();
+            var house_id = $('#house_id').val();
 
 
             if (from_date == '') {
@@ -119,6 +120,7 @@
                     from_date: from_date,
                     to_date: to_date,
                     category_id: category_id,
+                    house_id: house_id
                 },
                 success: function(data) {
                     if (data == 'f1') {
@@ -126,6 +128,22 @@
                     } else {
                         $('#loader').attr("style", "display: none;");
                         $('#get_content').html(data);
+
+
+
+                        $('#printReport').click(function() {
+                            var printContents = document.getElementById('get_content')
+                                .innerHTML;
+                            var originalContents = document.body.innerHTML;
+
+                            // Replace the body content with the report content for printing
+                            document.body.innerHTML = printContents;
+                            window.print();
+
+                            // Restore the original body content after printing
+                            document.body.innerHTML = originalContents;
+                            location.reload();
+                        });
                     }
                 }
             });

@@ -1,9 +1,25 @@
+<style>
+    @media print {
+
+        #loader,
+        #printReport {
+            display: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+    }
+</style>
 <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-md-10">
-                <h5 class="box-title" class="">Due Report <?php echo date('d-m-Y', strtotime($from_date)); ?> To <?php echo date('d-m-Y', strtotime($to_date)); ?>
+                <h5 class="box-title" class="">Due Report {{ \Carbon\Carbon::create()->month($month)->format('F') }}
+                    -
+                    <?php echo $year; ?>
                 </h5>
+                <button id="printReport" class="btn btn-sm btn-primary">Print Report</button>
             </div>
 
         </div>
@@ -14,12 +30,13 @@
                     <tr>
                         <td>S/L</td>
                         <td>House</td>
+                        <td>Floor</td>
+                        <td>Unit</td>
                         <td>Name</td>
                         <td>Mobile</td>
                         <td>Total Amount</td>
                         <td>Collection Amount</td>
                         <td>Due Amount</td>
-                        <td>Payment Date</td>
                 </thead>
                 </tr>
                 <tbody>
@@ -27,6 +44,8 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $report->rent->house->house_name }}</td>
+                            <td>{{ $report->rent->floor->name }} </td>
+                            <td>{{ $report->rent->unit->name }} </td>
                             <td>{{ $report->rent->renter->name }}</td>
                             <td>{{ $report->rent->renter->phone }}</td>
                             <td>{{ $report->total_amount }}</td>
@@ -34,7 +53,6 @@
                             <td>
                                 {{ $report->total_amount - $report->collection_amount }} <!-- Due Amount -->
                             </td>
-                            <td>{{ date('d-m-Y', strtotime($report->date)) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -53,7 +71,6 @@
                                     2,
                                 ) }}
                             </strong></td>
-                        <td></td>
                     </tr>
                 </tfoot>
 

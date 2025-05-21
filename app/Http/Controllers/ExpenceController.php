@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\IncomeExpence;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\IncomeExpenceCategory;
 
 class ExpenceController extends Controller
@@ -30,6 +31,7 @@ class ExpenceController extends Controller
      */
     public function create()
     {
+        
         $categories = IncomeExpenceCategory::where('status', '1')->get();
         $methods = PaymentMethod::get();
         $projects = House::get();

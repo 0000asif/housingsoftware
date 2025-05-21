@@ -43,7 +43,8 @@
                                         <select name="project_id" id="project_id" class="form-control select2_demo">
                                             <option value="">Select an option</option>
                                             @foreach ($all_house as $staff)
-                                                <option value="{{ $staff->id }}">{{ $staff->house_name }} {{ $staff->address }}</option>
+                                                <option value="{{ $staff->id }}">{{ $staff->house_name }}
+                                                    {{ $staff->address }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -78,7 +79,7 @@
                         {!! Form::close() !!}
                 </div>
             </div>
-            <center><img src="{{ asset('image/loading.gif') }}" style="display: none;" id="loader" alt="">
+            <center><img src="{{ asset('image/loader.gif') }}" style="display: none;" id="loader" alt="">
             </center>
             <span id="get_content"></span>
 
@@ -129,6 +130,21 @@
                     } else {
                         $('#loader').attr("style", "display: none;");
                         $('#get_content').html(data);
+
+
+                        $('#printReport').click(function() {
+                            var printContents = document.getElementById('get_content')
+                                .innerHTML;
+                            var originalContents = document.body.innerHTML;
+
+                            // Replace the body content with the report content for printing
+                            document.body.innerHTML = printContents;
+                            window.print();
+
+                            // Restore the original body content after printing
+                            document.body.innerHTML = originalContents;
+                            location.reload();
+                        });
                     }
                 }
             });

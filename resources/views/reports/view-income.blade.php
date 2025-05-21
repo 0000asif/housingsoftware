@@ -1,9 +1,24 @@
+<style>
+    @media print {
+
+        #loader,
+        #printReport {
+            display: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+    }
+</style>
 <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-md-10">
                 <h5 class="box-title" class="">Income Report <?php echo date('d-m-Y', strtotime($from_date)); ?> To <?php echo date('d-m-Y', strtotime($to_date)); ?>
                 </h5>
+
+                <button id="printReport" class="btn btn-sm btn-primary">Print Report</button>
             </div>
         </div>
 
@@ -12,6 +27,7 @@
                 <thead>
                     <tr>
                         <td>S/L</td>
+                        <td>House Name</td>
                         <td>Category Name</td>
                         <td>Income Amount</td>
                         <td>Date</td>
@@ -22,6 +38,7 @@
                     @foreach ($expense_report as $expense_head)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $expense_head->project ? $expense_head->project->house_name : '' }}</td>
                             <td>{{ $expense_head->category->name }}</td>
 
                             <td>{{ $expense_head->income_amount }}</td>
@@ -32,7 +49,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="2"><strong>Total:</strong></td>
+                        <td colspan="3"><strong>Total:</strong></td>
                         <td><strong>{{ number_format($expense_report->sum('income_amount'), 2) }}</strong></td>
                         <td colspan="3"></td>
                     </tr>

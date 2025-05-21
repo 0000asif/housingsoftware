@@ -224,7 +224,14 @@
 
                                     <td>{{ $value->year }}</td>
                                     <td>{{ date('F', mktime(0, 0, 0, $value->month, 1)) }}</td>
-                                    <td>{{ $value->total_amount }}</td>
+                                    <td>
+                                        @php
+                                            $totalAmount = $value->total_amount;
+                                            $collectionAmount = $value->collection_amount;
+                                            $dueAmount = $totalAmount - $collectionAmount;
+                                            echo number_format($dueAmount, 2);
+                                        @endphp
+                                    </td>
                                     <td>
                                         <div class="btn-group">
                                             <a href="{{ route('singleRentCollection.show', $value->id) }}"

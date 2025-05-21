@@ -158,6 +158,8 @@ class RentController extends Controller
             'status' => 'required',
         ]);
 
+
+
         $start_date = date('Y-m-d', strtotime($request->rent_date));
         $rent       = Rent::findOrFail($id);
         $unit_id    = $rent->unit_id;
@@ -166,6 +168,16 @@ class RentController extends Controller
             $unit_status = false;
         } else {
             $unit_status = true;
+        }
+
+        if ($unit_status == false && $request->status == 1) {
+            $unit = Unit::find($request->unit_id);
+            if ($unit->rent_status == 1) {
+                return redirect()->back()->with('failed', 'This unit is already rented.');
+            } else {
+                $unit->rent_status = 1;
+            }
+            $unit->save();
         }
 
         $data               = $request->all();
@@ -194,12 +206,11 @@ class RentController extends Controller
             $unit               = Unit::find($request->unit_id);
             $unit->rent_status  = 1; // status 0 meand avilable & 1 means rented.
             $unit->save();
-        } else {
+        } else if ($request->status == 0) {
             $befor_unit_info                = Unit::find($unit_id);
             $befor_unit_info->rent_status   = 0;
             $befor_unit_info->save();
         }
-
 
         return redirect()->route('rent.index')->with('success', 'Rent record updated successfully.');
     }

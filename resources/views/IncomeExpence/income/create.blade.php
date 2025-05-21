@@ -46,7 +46,7 @@
                             <div class="col-12 col-md-6 col-lg-6">
                                 <div class="form-group mb-4">
                                     <label>House</label>
-                                    <select class="form-control select2_demo" id="project_id" name="project_id">
+                                    <select class="form-control select2_demo" id="house_id" name="house_id">
                                         <option value="">Select an Option</option>
                                         @foreach ($projects as $value)
                                             <option value="{{ $value->id }}">{{ $value->house_name }}

@@ -1,9 +1,23 @@
+<style>
+    @media print {
+
+        #loader,
+        #printReport {
+            display: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+    }
+</style>
 <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-md-10">
                 <h5 class="box-title" class="">Expense Report <?php echo date('d-m-Y', strtotime($from_date)); ?> To <?php echo date('d-m-Y', strtotime($to_date)); ?>
                 </h5>
+                <button id="printReport" class="btn btn-sm btn-primary">Print Report</button>
             </div>
         </div>
 
@@ -23,7 +37,7 @@
                     @foreach ($expense_report as $expense_head)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $expense_head->house ? $expense_head->house->house_name : '' }}</td>
+                            <td>{{ $expense_head->project ? $expense_head->project->house_name : '' }}</td>
                             <td>{{ $expense_head->category->name }}</td>
                             <td>{{ $expense_head->expence_amount }}</td>
                             <td>{{ date('d-m-Y', strtotime($expense_head->date)) }}</td>

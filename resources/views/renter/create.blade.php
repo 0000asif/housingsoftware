@@ -48,7 +48,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="nid" class="form-label">NID <span style="color: red;">*</span></label>
-                                <input type="text" id="nid" required name="nid" class="form-control"
+                                <input type="number" id="nid" required name="nid" class="form-control"
                                     placeholder="Enter NID">
                             </div>
                             <div class="col-md-6">

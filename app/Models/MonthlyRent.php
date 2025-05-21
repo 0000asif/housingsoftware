@@ -35,5 +35,4 @@ class MonthlyRent extends Model
     {
         return $this->hasMany(RentCollectionHistory::class, 'monthly_rent_id');
     }
-
 }

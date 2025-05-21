@@ -97,13 +97,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/rent-increase-decrease/get-renter', [RentController::class, 'getRenter'])->name('RentIncreaseDecrease.GetRenter');
 
-
     Route::get('printRentCollection/{id}', [MonthlyRentController::class, 'print'])->name('singleRentCollection.print');
-
     Route::post('/generate-rent', [MonthlyRentController::class, 'generateRent'])->name('generate.rent');
-
     Route::get('/allgenerate-rent/create', [MonthlyRentController::class, 'allrentcreate'])->name('all.rentcreate');
-
     Route::post('/allgenerate-rent', [MonthlyRentController::class, 'allgenerateRent'])->name('allgenerate.rent');
 
     Route::get('/collectionrent', [RentCollectionController::class, 'index'])->name('rentcollection.index');

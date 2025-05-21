@@ -1,9 +1,24 @@
+<style>
+    @media print {
+
+        #loader,
+        #printReport {
+            display: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+    }
+</style>
 <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-md-10">
-                <h5 class="box-title" class="">Rent Report {{ $year }} year {{ $month }} month.
+                <h5 class="box-title" class="">Rent Report Year: {{ $year }} - Month:
+                    {{ \Carbon\Carbon::create()->month($month)->format('F') }}
                 </h5>
+                <button id="printReport" class="btn btn-sm btn-primary">Print Report</button>
             </div>
 
         </div>
@@ -14,6 +29,8 @@
                     <tr>
                         <td>S/L</td>
                         <td>House</td>
+                        <td>Floor</td>
+                        <td>Unit</td>
                         <td>Name</td>
                         <td>Mobile</td>
                         <td>Total </td>
@@ -28,6 +45,8 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $report->rent->house->house_name }} </td>
+                            <td>{{ $report->rent->floor->name }} </td>
+                            <td>{{ $report->rent->unit->name }} </td>
                             <td>{{ $report->rent->renter->name }} </td>
                             <td>{{ $report->rent->renter->phone }}</td>
                             <td>{{ $report->total_amount }}</td>
@@ -48,7 +67,7 @@
 
                 <tfoot>
                     <tr>
-                        <td colspan="4"><strong>Total:</strong></td>
+                        <td colspan="6"><strong>Total:</strong></td>
                         <td><strong>
                                 {{ number_format($rent_report->sum('total_amount'), 2) }}
                             </strong>
@@ -69,6 +88,7 @@
                                     2,
                                 ) }}</strong>
                         </td>
+                        <td></td>
                     </tr>
                 </tfoot>
 
